@@ -38,7 +38,17 @@
     font-family: "Rowdies", sans-serif;
     color: var(--var-white);
     text-decoration: none;
+    
 }
+.logo a:hover{
+    color: var(--var-yellow);
+    -webkit-transition: color .4s;
+    -moz-transition:    color .4s;
+    -ms-transition:     color .4s;
+    -o-transition:      color .4s;
+    transition:         color .4s;
+}
+
 nav ul{
     display: flex;
     list-style: none;
@@ -47,15 +57,24 @@ nav ul{
 
 nav ul li{
     margin: 0 15px;
+    
 }
 nav ul li a{
     text-decoration: none;
     color: var(--var-yellow);
     font-family: "Cabin", sans-serif;
 }
+nav ul li a:hover{
+    color: var(--var-white);
+    -webkit-transition: color .4s;
+    -moz-transition:    color .4s;
+    -ms-transition:     color .4s;
+    -o-transition:      color .4s;
+    transition:         color .4s;
+}
 
 .hero-section{
-    background:  linear-gradient( rgba(0, 0, 0, 0.575), rgba(0, 0, 0, 0.5) ), url(https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?cs=srgb&dl=pexels-thgusstavo-1813272.jpg&fm=jpg) no-repeat center center/cover;
+    background:  linear-gradient( rgba(0, 0, 0, 0.575), rgba(0, 0, 0, 0.897) ), url(https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?cs=srgb&dl=pexels-thgusstavo-1813272.jpg&fm=jpg) no-repeat center center/cover;
     height: 100vh;
     text-align: center;
     display: flex;
@@ -64,6 +83,13 @@ nav ul li a{
     font-family: "Rowdies", sans-serif;
     color: var(--var-white);
     font-size: 2rem;
+}
+.hero-section h1 {
+    transition: transform 0.1s ease-in-out;
+}
+
+.hero-section h1:hover {
+    transform: translateY(-10px);
 }
 
 .sobrenos-section{
@@ -108,11 +134,20 @@ nav ul li a{
     background: var(--var-white);
     width: 100%;
     max-width: 300px;
-    height: 200px;
+    height: 250px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.151);
     /*Overflow hidden prevents the border-radius from not affecting the image too. Without it, the image would overflow and make the card look like a square*/
     border-radius: 10px;
     overflow: hidden;
+
+
+    transition: transform 0.2s ease-in-out;
+}
+
+
+.card:hover {
+    transform: translateY(-10px) translateX(-10px);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.37);
 }
 .card img{
     width: 100%;
