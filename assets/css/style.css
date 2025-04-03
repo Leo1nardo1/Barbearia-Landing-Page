@@ -75,6 +75,7 @@ nav ul li a:hover {
     font-size: 2rem;
     color: var(--var-yellow);
     cursor: pointer;
+    margin-left: auto; /* Pushes it to the right */
 }
 
 /* Hero Section */
@@ -119,9 +120,9 @@ nav ul li a:hover {
     text-align: center;
 }
 
-.card-title h2 {
+section h2 {
     font-family: "Cabin", sans-serif;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 
@@ -433,16 +434,22 @@ form .button input:hover{
         display: block;
     }
 
+    nav {
+        position: relative;
+    }
+
     nav ul {
         display: none;
         flex-direction: column;
         background: rgba(0, 0, 0, 0.9);
         position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
+        top: 36px;
+        right: -20px; 
+        width: 200px;
         padding: 10px 0;
         text-align: center;
+        border-radius: 5px;
+        z-index: 999;
     }
 
     nav ul.active {
@@ -450,7 +457,7 @@ form .button input:hover{
     }
 
     nav ul li {
-        margin: 15px 0;
+        margin: 15px 20px;
     }
 
     .hero-section {
