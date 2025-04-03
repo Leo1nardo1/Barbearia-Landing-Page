@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia 2 Irmãos</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body id="home">
+    <div class="grid-layout">
+        <header class="navbar">
+            <div class="logo">
+                <a href="index.html#home"><i class="fa-solid fa-scissors"></i> Barbearia 2 Irmãos</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="agendar.html">Agendar</a></li>
+                    <li><a href="index.html#sobrenos-section">Sobre Nós</a></li>
+                    <li><a href="index.html#card-section">Galeria</a></li>
+                    <li><a href="index.html#text-image-section">Localização</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="booking-section">
+            <div class="container">
+                <div class="title">Agendamento</div>
+                <form action="agendamentos.html" method="get">
+                    <div class="booking-form">
+                        <div class="input-box">
+                            <span class="booking">Nome</span>
+                            <input type="name" name="name" placeholder="Digite o seu nome" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="booking">Telefone</span>
+                            <input type="text" name="phone" id="phone" placeholder="(XX) X XXXX-XXXX" required>
+                        </div>
+                        
+                        <div class="input-box">
+                            <span class="booking">Data</span>
+                            <input type="date" id="appointment_date" name="appointment_date" required>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="booking">Horário</span>
+                            <select id="appointment_time" name="appointment_time" required>
+                                <option value="">Selecione uma data primeiro</option>
+                            </select>
+                        </div>
+                        <div class="input-box">
+                            <span class="booking">Serviço desejado</span>
+                            <select name="service" id="service" required>
+                                <option value="">Selecione uma opção</option>
+                                <option value="beard">Barba</option>
+                                <option value="hair">Cabelo</option>
+                                <option value="package">Conjunto</option>
+                            </select>
+                        </div>
+                        <div class="input-box">
+                            <span class="booking">Preferência de barbeiro</span>
+                            <select name="barber" id="barber" required>
+                                <option value="">Selecione uma opção</option>
+                                <option value="barber1">Barbeiro 1</option>
+                                <option value="barber2">Barbeiro 2</option>
+                            </select>
+                        </div>
+                        <div class="input-box">
+                            <span class="booking">Comentário adicional (opcional)</span>
+                            <textarea name="comment" id="comment" maxlength="255" placeholder="Escreva seu comentário..."></textarea>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <input type="submit" id="agendar" value="Agendar">
+                    </div>
+                    <div style="display:none;">
+                        <input type="text" name="website" id="website" autocomplete="off">
+                    </div>
+                </form>
+            </div>
+            
+        </section>
+        <footer class="footer">
+            <p>© 2025 Barbearia Dois Irmãos. Todos os direitos reservados.</p>
+            <div class="icons">
+                 <h1>Redes Sociais</h1>
+                <a href="https://www.instagram.com"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.facebook.com"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.x.com"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+    <script src="assets/javascript/formulario.js"></script>
+
+</body>
+
+</html>

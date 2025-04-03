@@ -1,0 +1,56 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamentos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/table.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Painel de Administração - Agendamentos</h1>
+        
+        <div id="appointments-container">
+            <table id="appointments-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>Data e Horário</th>
+                        <th>Serviço</th>
+                        <th>Barbeiro</th>
+                        <th>Comentário</th>
+                        <th>Data do Agendamento</th>
+                        <th>Status</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="appointments-tbody">
+                    <!-- Javascript vai carregar as informações aqui -->
+                </tbody>
+            </table>
+            
+            <div class="page-info" id="page-info">
+                Mostrando 0 de 0 agendamentos
+            </div>
+            
+            <div class="pagination" id="pagination">
+                <!-- Javascript vai carregar os botoes aqui -->
+            </div>
+            <div id="comment-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Comentário</h2>
+                    <p id="modal-comment-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/javascript/javascript.js"></script>
+</body>
+</html>

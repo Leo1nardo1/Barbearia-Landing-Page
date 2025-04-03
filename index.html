@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -13,21 +13,25 @@
     <div class="grid-layout">
         <header class="navbar">
             <div class="logo">
-                <a href="#home"><i class="fa-solid fa-scissors"></i> Barbearia 2 Irmãos</a></div>
+                <a href="#home"><i class="fa-solid fa-scissors"></i> Barbearia 2 Irmãos</a>
+            </div>
+            <div class="menu-toggle">&#9776;</div> <!-- Hamburger Icon -->
             <nav>
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Sobre Nós</a></li>
-                    <li><a href="">Galeria</a></li>
-                    <li><a href="">Localização</a></li>
-                    <li><a href="">Contato</a></li>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="agendar.html">Agendar</a></li>
+                    <li><a href="#sobrenos-section">Sobre Nós</a></li>
+                    <li><a href="#card-section">Galeria</a></li>
+                    <li><a href="#text-image-section">Localização</a></li>
+                    <li><a href="#">Contato</a></li>
                 </ul>
             </nav>
         </header>
+        
         <section class="hero-section">
             <h1>Barbearia 2 Irmãos</h1>
         </section>
-        <section class="sobrenos-section">
+        <section class="sobrenos-section" id="sobrenos-section">
             <h2>Sobre Nós</h2>
             <div class="text-sobrenos">
                 <p>
@@ -36,8 +40,8 @@
             </div>
 
         </section>
-        <section class="card-section">
-            <div class="card-title">
+        <section class="card-section" id="card-section">
+            <!-- <div class="card-title">
                 <h2>Galeria</h2>
             </div>
             <div class="card-grid">
@@ -47,9 +51,24 @@
                 <div class="card"><img src="assets/images/Snapinsta.app_349448536_1284896265786223_5778080184042987507_n_1080-850x708.jpg" alt=""></div>
                 <div class="card"><img src="assets/images/Cool-Fade-Haircuts-For-Black-Men.jpg" alt=""></div>
                 <div class="card"><img src="assets/images/DMrwpbZX4AErqfB.jpg" alt=""></div>
+            </div> -->
+            <div class="card-container">
+                <div class="card-title">
+                    <h2>Galeria</h2>
+                </div>
+                <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+                <div class="card-grid">
+                    <div class="card"><img src="assets/images/premium_photo-1661288491728-803da8a82b0f.jpg" alt=""></div>
+                    <div class="card"><img src="assets/images/f2a3cbdf3c0f4e13b2be1a43161d0885.jpg" alt=""></div>
+                    <div class="card"><img src="assets/images/burst-fade-for-black-men-with-very-short-hair.jpg" alt=""></div>
+                    <div class="card"><img src="assets/images/Snapinsta.app_349448536_1284896265786223_5778080184042987507_n_1080-850x708.jpg" alt=""></div>
+                    <div class="card"><img src="assets/images/Cool-Fade-Haircuts-For-Black-Men.jpg" alt=""></div>
+                    <div class="card"><img src="assets/images/DMrwpbZX4AErqfB.jpg" alt=""></div>
+                </div>
+                <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
             </div>
         </section>
-        <section class="text-image-section">
+        <section class="text-image-section" id="text-image-section">
             <div class="text-content">
                 <h2>Onde nos encontrar?</h2>
                 <p>Estamos localizados em Salvador, Bahia, na entrada do bairro da Engomadeira, sentido a estrada das barreiras, em um ponto de fácil acesso. Os ponto de referência são a UNEB, Atacarejo e Atacadão. Venha nos conhecer e renovar seu visual com quem entende do assunto!</p>
@@ -57,7 +76,8 @@
             <div class="location-card"><iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d364.12044565005925!2d-38.4608726332173!3d-12.95012892560826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7161a944632a971%3A0xcdecf4f83cba232d!2sBarbearia%202%20Irm%C3%A3os!5e0!3m2!1spt-BR!2sbr!4v1742326788369!5m2!1spt-BR!2sbr"
                     style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </section>
         <footer class="footer">
             <p>© 2025 Barbearia Dois Irmãos. Todos os direitos reservados.</p>
@@ -69,6 +89,30 @@
             </div>
         </footer>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navMenu = document.querySelector("nav ul");
+
+    menuToggle.addEventListener("click", function () {
+        navMenu.classList.toggle("active");
+    });
+});
+
+let index = 0;
+
+function moveSlide(direction) {
+    const slides = document.querySelectorAll(".card");
+    const totalSlides = slides.length;
+    index += direction;
+
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
+
+    const offset = -index * 100; // Move by 100% per slide
+    document.querySelector(".card-grid").style.transform = `translateX(${offset}%)`;
+}
+    </script>
 </body>
 
 </html>
