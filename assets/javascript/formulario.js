@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
             form.dispatchEvent(new Event('submit')); // Manually triggers form submission
         }
     });
-    //Resizing do textarea no formulario de agendamento
+    //Redimensionamento do textarea no formulario de agendamento
     textarea.addEventListener("keyup", e => {
         textarea.style.height = "45px";
         let scHeight = e.target.scrollHeight;
@@ -238,7 +238,7 @@ function updateAvailableTimeSlots(selectedDate) {
 
         updateSubmissionTracking();
 
-        // 
+        
         alert('Agendamento realizado com sucesso!');
         window.location.href = 'agendar.html';
     });

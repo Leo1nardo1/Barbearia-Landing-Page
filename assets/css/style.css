@@ -2,12 +2,33 @@
 
 :root {
     --var-yellow: #FEBE10;
-    --var-black: #000;
+    --var-full-black: #000;
     --var-white: #fff;
     --var-gray: #dddddd;
+    --var-accessibility-rgb: rbg(255, 193, 7);
+    --var-black: #333;
+    --text-color: #333;
+    --background-color: #ffffff;
+    --card-background: #ffffff;
+    --card-text: #555;
+    --section-background: #f5f5f5;
+    --heading-color: #333;
+    --border-color: #ffc107;
+    --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
-
+[data-theme="dark"] {
+    --var-gray: #232323;
+    --var-black: #e0e0e0;
+    --text-color: #e0e0e0;
+    --background-color: #121212;
+    --card-background: #2a2a2a;
+    --card-text: #d0d0d0;
+    --section-background: #232323;
+    --heading-color: #ffffff;
+    --border-color: #ffc107;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
 * {
     margin: 0;
     padding: 0;
@@ -90,12 +111,13 @@ nav ul li a:hover {
     text-align: center;
     font-family: "Rowdies", sans-serif;
     color: var(--var-white);
-    font-size: 2rem;
+    font-size: 4rem;
     padding: 20px;
 }
 
 .hero-section h1 {
     transition: transform 0.1s ease-in-out;
+    
 }
 
 .hero-section h1:hover {
@@ -104,15 +126,95 @@ nav ul li a:hover {
 
 /* Sobre Nós Section */
 .sobrenos-section {
-    padding: 80px 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    height: auto;
+    padding: 60px 20px;
     text-align: center;
     background: var(--var-gray);
 }
 
-.text-sobrenos {
+.sobrenos-section h1 {
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+    position: relative;
+    font-weight: 700;
+}
+
+.sobrenos-section h1::after {
+    content: '';
+    position: absolute;
+    width: 250px;
+    height: 4px;
+    background: var(--var-yellow);
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.text-sobrenos p {
+    font-size: 1.6rem;
     max-width: 80%;
     margin: 0 auto;
 }
+
+.sobrenos-section .cards-sobrenos-section {
+    display: flex;
+    height: 60%;
+    max-width: 1400px;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.sobrenos-section .cards-sobrenos-section .sobrenos-card {
+    background: #fff;
+    width: 450px;
+    height: auto;
+    height: 350px;
+    border-radius: 16px;
+    padding: 30px 25px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    border: 3px solid var(--var-yellow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sobrenos-section .cards-sobrenos-section .sobrenos-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.sobrenos-section .cards-sobrenos-section .sobrenos-card img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+    padding: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--var-yellow);
+}
+
+.sobrenos-section .cards-sobrenos-section .sobrenos-card p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-top: 5px;
+}
+
+.sobrenos-section .cards-sobrenos-section .sobrenos-card h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+
+
 
 /* Card Grid */
 .card-section {
@@ -120,8 +222,9 @@ nav ul li a:hover {
     text-align: center;
 }
 
-section h2 {
+.card-section .card-container .card-title h1 {
     font-family: "Cabin", sans-serif;
+    font-size: 2.8rem;
     margin-bottom: 30px;
 }
 
@@ -197,7 +300,6 @@ section h2 {
     object-fit: cover;
 }
 
-/* Text-Image Section */
 .text-image-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -206,7 +308,6 @@ section h2 {
     background: var(--var-gray);
 }
 
-/* Location Card */
 .location-card {
     display: flex;
     justify-content: center;
@@ -227,7 +328,8 @@ section h2 {
     text-align: center;
     padding: 20px;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     gap: 15px;
 }
 
@@ -318,7 +420,6 @@ form .booking-form .input-box {
     font-size: 16px;
     transition: all 0.3s ease;
 }
-/*Start highlight on select*/
 .booking-form .input-box input:focus, select:focus, textarea:focus{
     outline: none; 
     border: 3px solid blue; 
@@ -331,7 +432,6 @@ form .booking-form .input-box {
     box-shadow: 0 0 8px rgba(0, 0, 255, 0.5); 
     transition: 0.2s ease-in-out; 
 }
-/*End highlight on select*/
 .booking-form .input-box select {
     height: 45px;
     width: 100%;
@@ -398,6 +498,334 @@ form .button input:hover{
 
 
 
+
+/* Botão Acessibilidade */
+.accessibility-button {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-400%);
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--var-yellow);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.accessibility-button:hover {
+    transform: translateY(-420%) scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.accessibility-button img {
+    width: 32px;
+    height: 32px;
+}
+
+
+
+/* SIDEBAR ACESSIBILIDADE */
+.accessibility-sidebar {
+    position: fixed;
+    top: 0;
+    right: -320px; 
+    width: 300px;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 2000; 
+    transition: right 0.4s ease-in-out;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.accessibility-sidebar.active {
+    right: 0; 
+}
+
+/* OVERLAY QUANDO O SIDEBAR ESTÁ ABERTO */
+.accessibility-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1500; 
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.accessibility-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* BOTÃO DE FECHAMENTO */
+.accessibility-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.accessibility-close:hover {
+    background-color: #e0e0e0;
+}
+
+/* TITULO SIDEBAR */
+.accessibility-sidebar h3 {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--var-yellow);
+    font-size: 1.4rem;
+}
+
+/* CARD CONTAINER */
+.accessibility-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* BOTOES CARD */
+.accessibility-card {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.accessibility-card:hover {
+    border-color: var(--var-yellow);
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.accessibility-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 1px solid var(--var-yellow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.accessibility-card-icon img {
+    width: 22px;
+    height: 22px;
+}
+
+.accessibility-card-text {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/**************** DARK MODE *******************/
+/* Apply dark mode to sobrenos section */
+[data-theme="dark"] .sobrenos-section {
+    background: var(--section-background);
+}
+
+[data-theme="dark"] .sobrenos-section h1 {
+    color: var(--heading-color);
+}
+
+[data-theme="dark"] .sobrenos-card {
+    background: var(--card-background);
+    border-color: var(--border-color);
+    box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+[data-theme="dark"] .sobrenos-card h3 {
+    color: var(--heading-color);
+}
+
+[data-theme="dark"] .sobrenos-card p {
+    color: var(--card-text);
+}
+
+
+/* SEÇÃO DE GALERIA */
+[data-theme="dark"] .card-section {
+    background: var(--background-color);
+}
+
+[data-theme="dark"] .card-title h1 {
+    color: var(--heading-color);
+}
+
+[data-theme="dark"] .carousel-btn {
+    background-color: var(--card-background);
+    color: var(--text-color);
+}
+
+/* SEÇÃO DE LOCALIZAÇÃO */
+[data-theme="dark"] .text-image-section {
+    background: var(--section-background);
+}
+
+[data-theme="dark"] .text-image-section h2 {
+    color: var(--heading-color);
+}
+
+[data-theme="dark"] .text-image-section p {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .location-card {
+    background-color: var(--section-background);
+    border-color: var(--border-color);
+}
+
+/* Força darkmode no footer */
+[data-theme="dark"] .footer {
+    background-color: #1a1a1a;
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .footer a {
+    color: var(--text-color);
+}
+
+
+
+
+/* DARK MODE NA BARRA DE ACESSIBILIDADE */
+[data-theme="dark"] .accessibility-sidebar {
+    background-color: #2a2a2a;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .accessibility-sidebar h3 {
+    color: #ffffff;
+    border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .accessibility-close {
+    background-color: #3a3a3a;
+    color: #f0f0f0;
+}
+
+[data-theme="dark"] .accessibility-close:hover {
+    background-color: #4a4a4a;
+}
+
+[data-theme="dark"] .accessibility-card {
+    background-color: #333333;
+    border-color: transparent;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .accessibility-card:hover {
+    border-color: var(--border-color);
+    background-color: #494949;
+}
+
+[data-theme="dark"] .accessibility-card-icon {
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .accessibility-card-text {
+    color: #e0e0e0;
+}
+
+
+
+.accessibility-card.dark-mode-toggle {
+    position: relative;
+}
+
+.dark-mode-toggle .toggle-switch {
+    position: absolute;
+    right: 15px;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+    background-color: var(--var-yellow);
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(18px);
+}
+
+[data-theme="dark"] input:checked + .toggle-slider {
+    background-color: var(--var-yellow);
+}
+
+/* transição suave*/
+body, .sobrenos-section, .card-section, .text-image-section, .footer,
+.sobrenos-card, .accessibility-sidebar, .accessibility-card {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+/* RESPONSIVIDADE */
 
 @media (max-width: 584px){
     .container{
@@ -498,3 +926,87 @@ form .button input:hover{
         text-align: center;
     }
 }
+/* SOBRE NÓS */
+@media (max-width: 1200px) {
+    .sobrenos-section .cards-sobrenos-section {
+        flex-wrap: wrap;
+    }
+    
+    .sobrenos-section .cards-sobrenos-section .sobrenos-card {
+        width: calc(50% - 30px);
+    }
+}
+
+@media (max-width: 768px) {
+    .sobrenos-section .cards-sobrenos-section .sobrenos-card {
+        width: 100%;
+    }
+}
+
+
+
+
+@media (max-width: 768px) {
+    .accessibility-sidebar {
+        width: 260px;
+        right: -280px;
+    }
+    
+    .accessibility-card {
+        padding: 12px;
+    }
+    
+    .accessibility-card-icon {
+        width: 35px;
+        height: 35px;
+        margin-right: 12px;
+    }
+    
+    .accessibility-card-icon img {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+
+/* Animação no botão */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(var(--var-accessibility-rgb), 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(var(--var-accessibility-rgb), 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(var(--var-accessibility-rgb), 0);
+    }
+}
+
+
+@media (max-width: 768px) {
+    .accessibility-button {
+        width: 45px;
+        height: 45px;
+        right: 15px;
+    }
+    
+    .accessibility-button img {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

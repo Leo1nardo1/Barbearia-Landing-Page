@@ -1,21 +1,102 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barbearia 2 Irmãos</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="assets/images/scissors.png" type="image/x-icon">
+
 </head>
 
 <body id="home">
+    <div class="accessibility-button" id="accessibilityButton" aria-label="Opções de accessibilidade" role="button"
+        tabindex="0">
+        <img src="assets/images/accessibility.png" alt="Opções de accessibilidade">
+    </div>
+    <!-- Overlay de accesibilidade (permite clicar fora e fechar) -->
+    <div class="accessibility-overlay" id="accessibilityOverlay"></div>
+
+    <!-- Sidebar de Acessibilidade -->
+    <div class="accessibility-sidebar" id="accessibilitySidebar">
+        <button class="accessibility-close" id="accessibilityClose">×</button>
+        <h3>Opções de Acessibilidade</h3>
+
+        <div class="accessibility-cards">
+            <!-- Card 1 -->
+            <div class="accessibility-card dark-mode-toggle">
+                <div class="accessibility-card-icon">
+                    <img src="assets/images/dark-mode.png" alt="Modo Escuro">
+                </div>
+                <div class="accessibility-card-text">Modo escuro</div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="darkModeToggle">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="accessibility-card">
+                <div class="accessibility-card-icon">
+                    <img src="assets/images/font.png" alt="Tamanho do texto">
+                </div>
+                <div class="accessibility-card-text">Tamanho do texto</div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="accessibility-card">
+                <div class="accessibility-card-icon">
+                    <img src="assets/images/marker.png" alt="Destacar Elementos">
+                </div>
+                <div class="accessibility-card-text">Destacar elementos</div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="accessibility-card">
+                <div class="accessibility-card-icon">
+                    <img src="assets/images/dyslexia.png" alt="Fonte de dislexia">
+                </div>
+                <div class="accessibility-card-text">Fonte de dislexia</div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="accessibility-card">
+                <div class="accessibility-card-icon">
+                    <img src="assets/images/cursor.png" alt="Cursor Maior">
+                </div>
+                <div class="accessibility-card-text">Cursor maior</div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="accessibility-card">
+                <div class="accessibility-card-icon">
+                    <img src="assets/images/text-spacing.png" alt="Espaçamento de texto">
+                </div>
+                <div class="accessibility-card-text">Espaçamento de texto</div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="accessibility-card">
+                <div class="accessibility-card-icon">
+                    <img src="assets/images/refresh-arrow.png" Resetar tudo">
+                </div>
+                <div class="accessibility-card-text">Resetar tudo</div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="grid-layout">
         <header class="navbar">
             <div class="logo">
                 <a href="#home"><i class="fa-solid fa-scissors"></i> Barbearia 2 Irmãos</a>
             </div>
-            <div class="menu-toggle">&#9776;</div> 
+            <div class="menu-toggle">&#9776;</div>
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
@@ -27,18 +108,30 @@
                 </ul>
             </nav>
         </header>
-        
+
         <section class="hero-section">
             <h1>Barbearia 2 Irmãos</h1>
         </section>
-        <section class="sobrenos-section" id="sobrenos-section">
-            <h2>Sobre Nós</h2>
-            <div class="text-sobrenos">
-                <p>
-                    Na Barbearia Dois Irmãos, tradição e estilo andam juntos! Há anos, oferecemos cortes impecáveis, barba bem feita e um ambiente acolhedor para nossos clientes. Nosso time de barbeiros é especializado em diversos estilos, desde os clássicos aos mais modernos, sempre garantindo qualidade e satisfação. Aqui, cada cliente é tratado como parte da família. Venha conhecer a verdadeira arte da barbearia!
-                </p>
-            </div>
 
+        <section class="sobrenos-section" id="sobrenos-section">
+            <h1>Sobre Nós</h1>
+            <div class="cards-sobrenos-section">
+                <div class="sobrenos-card">
+                    <img src="assets/images/multiple-users-silhouette.png" alt="Grupo de pessoas">
+                    <h3>Nossa Equipe</h3>
+                    <p>Somos dois irmãos unidos pela paixão em oferecer um serviço de excelência. Com décadas de experiência acumulada, trabalhamos com dedicação e comprometimento para garantir a melhor experiência aos nossos clientes.</p>
+                </div>
+                <div class="sobrenos-card">
+                    <img src="assets/images/quality.png" alt="Experiência">
+                    <h3>Qualidade Garantida</h3>
+                    <p>Com uma trajetória sólida e conhecimento aprofundado na área, entregamos resultados com alto padrão de qualidade. Nosso compromisso é com a sua satisfação em cada detalhe do nosso trabalho.</p>
+                </div>
+                <div class="sobrenos-card ">
+                    <img src="assets/images/clock.png" alt="Horário">
+                    <h3>Atendimento</h3>
+                    <p>Estamos disponíveis para atender você de segunda a sábado, das 9h às 19h. Conte conosco para um atendimento rápido, eficiente e sempre pronto para ajudar no que for necessário.</p>
+                </div>
+            </div>
         </section>
         <section class="card-section" id="card-section">
             <!-- <div class="card-title">
@@ -54,14 +147,18 @@
             </div> -->
             <div class="card-container">
                 <div class="card-title">
-                    <h2>Galeria</h2>
+                    <h1>Galeria</h1>
                 </div>
                 <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
                 <div class="card-grid">
-                    <div class="card"><img src="assets/images/premium_photo-1661288491728-803da8a82b0f.jpg" alt=""></div>
+                    <div class="card"><img src="assets/images/premium_photo-1661288491728-803da8a82b0f.jpg" alt="">
+                    </div>
                     <div class="card"><img src="assets/images/f2a3cbdf3c0f4e13b2be1a43161d0885.jpg" alt=""></div>
-                    <div class="card"><img src="assets/images/burst-fade-for-black-men-with-very-short-hair.jpg" alt=""></div>
-                    <div class="card"><img src="assets/images/Snapinsta.app_349448536_1284896265786223_5778080184042987507_n_1080-850x708.jpg" alt=""></div>
+                    <div class="card"><img src="assets/images/burst-fade-for-black-men-with-very-short-hair.jpg" alt="">
+                    </div>
+                    <div class="card"><img
+                            src="assets/images/Snapinsta.app_349448536_1284896265786223_5778080184042987507_n_1080-850x708.jpg"
+                            alt=""></div>
                     <div class="card"><img src="assets/images/Cool-Fade-Haircuts-For-Black-Men.jpg" alt=""></div>
                     <div class="card"><img src="assets/images/DMrwpbZX4AErqfB.jpg" alt=""></div>
                 </div>
@@ -71,7 +168,9 @@
         <section class="text-image-section" id="text-image-section">
             <div class="text-content">
                 <h2>Onde nos encontrar?</h2>
-                <p>Estamos localizados em Salvador, Bahia, na entrada do bairro da Engomadeira, sentido a estrada das barreiras, em um ponto de fácil acesso. Os ponto de referência são a UNEB, Atacarejo e Atacadão. Venha nos conhecer e renovar seu visual com quem entende do assunto!</p>
+                <p>Estamos localizados em Salvador, Bahia, na entrada do bairro da Engomadeira, sentido a estrada das
+                    barreiras, em um ponto de fácil acesso. Os ponto de referência são a UNEB, Atacarejo e Atacadão.
+                    Venha nos conhecer e renovar seu visual com quem entende do assunto!</p>
             </div>
             <div class="location-card"><iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d364.12044565005925!2d-38.4608726332173!3d-12.95012892560826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7161a944632a971%3A0xcdecf4f83cba232d!2sBarbearia%202%20Irm%C3%A3os!5e0!3m2!1spt-BR!2sbr!4v1742326788369!5m2!1spt-BR!2sbr"
@@ -82,7 +181,7 @@
         <footer class="footer" id="footer">
             <p>© 2025 Barbearia Dois Irmãos. Todos os direitos reservados.</p>
             <div class="icons">
-                 <h1>Redes Sociais</h1>
+                <h1>Redes Sociais</h1>
                 <a href="https://www.instagram.com"><i class="fa-brands fa-instagram"></i></a>
                 <a href="https://www.facebook.com"><i class="fa-brands fa-facebook"></i></a>
                 <a href="https://www.x.com"><i class="fa-brands fa-x-twitter"></i></a>
