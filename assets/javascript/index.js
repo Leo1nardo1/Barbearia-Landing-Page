@@ -85,9 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
             setDarkMode(false);
             //ADICIONE OUTROS RESETS AQUI
         });
-    } else {
-        console.error("Reset card not found");
-    }
+    } 
 
     // Fecha acessibilidade com esc
     document.addEventListener('keydown', function (e) {
