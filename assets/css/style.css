@@ -1,4 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Rowdies:wght@300;400;700&display=swap');
+/* * {
+    outline: 1px solid red; SERVE PARA DESTACAR TODOS OS ELEMENTOS DA PÁGINA
+  } */
+
+
+/*Permite um rolamento suave ao clicar nos links que direcionam as seções da página*/
+html {
+    scroll-behavior: smooth;
+}
 
 :root {
     --var-yellow: #FEBE10;
@@ -29,6 +38,8 @@
     --border-color: #ffc107;
     --shadow-color: rgba(0, 0, 0, 0.3);
 }
+
+
 * {
     margin: 0;
     padding: 0;
@@ -80,6 +91,7 @@ nav ul li {
 }
 
 nav ul li a {
+    font-size: 1.2rem;
     text-decoration: none;
     color: var(--var-yellow);
     font-family: "Cabin", sans-serif;
@@ -96,16 +108,16 @@ nav ul li a:hover {
     font-size: 2rem;
     color: var(--var-yellow);
     cursor: pointer;
-    margin-left: auto; 
+    margin-left: auto;
 }
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.575), rgba(0, 0, 0, 0.897)), 
-        url("https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?cs=srgb&dl=pexels-thgusstavo-1813272.jpg&fm=jpg") 
-        no-repeat center center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.705), rgba(0, 0, 0, 0.897)),
+        url("https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?cs=srgb&dl=pexels-thgusstavo-1813272.jpg&fm=jpg") no-repeat center center/cover;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -113,19 +125,54 @@ nav ul li a:hover {
     color: var(--var-white);
     font-size: 4rem;
     padding: 20px;
+    position: relative;
 }
 
 .hero-section h1 {
-    transition: transform 0.1s ease-in-out;
-    
+    opacity: 0;
+    transform: scale(0.8);
+    animation: surge 1s ease-out forwards;
+  }
+  
+  @keyframes surge {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+.ver-mais-btn {
+    position: absolute;
+    bottom: 50px;
+    font-size: 1.2rem;
+    color: var(--var-white);
+    background-color: transparent;
+    border: 2px solid var(--var-white);
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-family: "Rowdies", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.hero-section h1:hover {
-    transform: translateY(-10px);
+.ver-mais-btn:hover {
+    background-color: var(--var-white);
+    color: #000;
+    transform: translateY(-5px);
 }
 
 /* Sobre Nós Section */
-.sobrenos-section {
+.about-section {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -136,14 +183,14 @@ nav ul li a:hover {
     background: var(--var-gray);
 }
 
-.sobrenos-section h1 {
+.about-section h1 {
     font-size: 2.8rem;
     margin-bottom: 40px;
     position: relative;
     font-weight: 700;
 }
 
-.sobrenos-section h1::after {
+.about-section h1::after {
     content: '';
     position: absolute;
     width: 250px;
@@ -154,13 +201,13 @@ nav ul li a:hover {
     transform: translateX(-50%);
 }
 
-.text-sobrenos p {
+.text-about p {
     font-size: 1.6rem;
     max-width: 80%;
     margin: 0 auto;
 }
 
-.sobrenos-section .cards-sobrenos-section {
+.about-section .cards-about-section {
     display: flex;
     height: 60%;
     max-width: 1400px;
@@ -170,11 +217,11 @@ nav ul li a:hover {
     margin-top: 20px;
 }
 
-.sobrenos-section .cards-sobrenos-section .sobrenos-card {
+.about-section .cards-about-section .about-card {
     background: #fff;
     width: 450px;
     height: auto;
-    height: 350px;
+    min-height: 350px;
     border-radius: 16px;
     padding: 30px 25px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
@@ -185,12 +232,12 @@ nav ul li a:hover {
     align-items: center;
 }
 
-.sobrenos-section .cards-sobrenos-section .sobrenos-card:hover {
+.about-section .cards-about-section .about-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
 }
 
-.sobrenos-section .cards-sobrenos-section .sobrenos-card img {
+.about-section .cards-about-section .about-card img {
     width: 60px;
     height: 60px;
     margin-bottom: 20px;
@@ -199,14 +246,14 @@ nav ul li a:hover {
     border: 2px solid var(--var-yellow);
 }
 
-.sobrenos-section .cards-sobrenos-section .sobrenos-card p {
+.about-section .cards-about-section .about-card p {
     font-size: 1.1rem;
     line-height: 1.6;
     color: #555;
     margin-top: 5px;
 }
 
-.sobrenos-section .cards-sobrenos-section .sobrenos-card h3 {
+.about-section .cards-about-section .about-card h3 {
     font-size: 1.4rem;
     font-weight: 600;
     margin-bottom: 15px;
@@ -229,34 +276,13 @@ nav ul li a:hover {
 }
 
 
-/* .card-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; 
-    gap: 20px;
-    padding: 40px 0;
-    max-width: 960px;
-    margin: 0 auto;
-    background: var(--var-white);
-} */
-
-/* .card {
-    background: var(--var-white);
-    width: 100%;
-    max-width: 300px;
-    height: 250px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.151);
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.2s ease-in-out;
-} */
- /*Carousel setup*/
+/* Estilização do Slide */
 .card-container {
     position: relative;
     width: 100%;
-    max-width: 400px; 
+    max-width: 400px;
     margin: 0 auto;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .card-grid {
@@ -266,7 +292,7 @@ nav ul li a:hover {
 }
 
 .card {
-    flex: 0 0 100%; 
+    flex: 0 0 100%;
     max-width: 100%;
     transition: transform 0.3s ease-in-out;
 }
@@ -284,8 +310,13 @@ nav ul li a:hover {
     z-index: 10;
 }
 
-.prev { left: 10px; }
-.next { right: 10px; }
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
 
 
 
@@ -349,155 +380,8 @@ nav ul li a:hover {
 }
 
 
-
-
-
-
-/*PÁGINA AGENDAMENTO*/
-
-.booking-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.575), rgba(0, 0, 0, 0.897)), url(https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?cs=srgb&dl=pexels-thgusstavo-1813272.jpg&fm=jpg) no-repeat center center/cover;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    color: #000;
-    padding: 10px;
-}
-
-.container {
-    max-width: 700px;
-    width: 100%;
-    background: #fff;
-    padding: 25px 30px;
-    border-radius: 5px;
-}
-
-.container .title {
-    font-size: 25px;
-    font-weight: 500;
-    position: relative;
-}
-
-.container .title::before {
-    content: '';
-    position: absolute;
-    height: 3px;
-    width: 180px;
-    margin-bottom: -5px;
-    left: 0;
-    bottom: 0;
-    background: var(--var-yellow);
-}
-
-.container form .booking-form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 20px 0 12px 0;
-    
-}
-
-form .booking-form .input-box {
-    width: calc(100% / 2 - 20px);
-    margin-bottom: 15px;
-}
-
-.booking-form .input-box .booking {
-    font-weight: 500;
-    margin-bottom: 5px;
-    display: block;
-}
-
-.booking-form .input-box input {
-    height: 45px;
-    width: 100%;
-    outline: none;
-    border-radius: 5px;
-    border: 2px solid #000;
-    padding-left: 15px;
-    font-size: 16px;
-    transition: all 0.3s ease;
-}
-.booking-form .input-box input:focus, select:focus, textarea:focus{
-    outline: none; 
-    border: 3px solid rgb(20, 20, 240); 
-    box-shadow: 0 0 5px rgba(1, 1, 238, 0.5);
-    transition: 0.2s ease-in-out;  
-}
-.button input[type="submit"]:focus {
-    outline: none; 
-    border: 3px solid blue; 
-    box-shadow: 0 0 8px rgba(0, 0, 255, 0.5); 
-    transition: 0.2s ease-in-out; 
-}
-.booking-form .input-box select {
-    height: 45px;
-    width: 100%;
-    outline: none;
-    border-radius: 5px;
-    border: 2px solid var(--var-full-black);
-    padding-left: 15px;
-    font-size: 16px;
-    color: var(--var-full-black);
-    background: var(--var-yellow);
-    padding: 0 30px 0 15px;
-}
-.booking-form .input-box textarea{
-    width: 100%;
-    height: 45px;
-    padding: 15px;
-    border-radius: 5px;
-    outline: none;
-    resize: none;
-    border-color: var(--var-gray);
-    border: 3px solid var(--var-gray);
-    max-height: 250px;
-    font-size: 1rem;
-    
-}
-.booking-form .input-box textarea:is(:focus, :valid) {
-    border-color: var(--var-full-black);
-    padding: 14px;
-    border-width: 2px;
-}
-textarea::-webkit-scrollbar{
-    width: 0;
-}
-
-.booking-form .input-box input:focus,
-.booking-form .input-box input:valid {
-    border-color: var(--var-full-black);
-}
-
-form .button {
-    height: 45px;
-    margin: 30px 0;
-}
-
-form .button input {
-    height: 100%;
-    width: 100%;
-    outline: none;
-    border: none;
-    color: var(--var-full-black);
-    background: #E0C70B;
-    background: linear-gradient(135deg, #E0C70B, #EFD364);
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 5px;
-    letter-spacing: 1px;
-    cursor: pointer;
-}
-
-form .button input:hover{
-    background: #E0C70B;
-    background: linear-gradient(-135deg, #E0C70B, #EFD364);
-}
-
-
-
+/********************************* ACESSIBILIDADE ********************************/
+/************************************************************************************/
 
 /* Botão Acessibilidade */
 .accessibility-button {
@@ -535,19 +419,19 @@ form .button input:hover{
 .accessibility-sidebar {
     position: fixed;
     top: 0;
-    right: -320px; 
+    right: -320px;
     width: 300px;
     height: 100vh;
     background-color: #fff;
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-    z-index: 2000; 
+    z-index: 2000;
     transition: right 0.4s ease-in-out;
     padding: 20px;
     overflow-y: auto;
 }
 
 .accessibility-sidebar.active {
-    right: 0; 
+    right: 0;
 }
 
 /* OVERLAY QUANDO O SIDEBAR ESTÁ ABERTO */
@@ -558,7 +442,7 @@ form .button input:hover{
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1500; 
+    z-index: 1500;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease;
@@ -652,27 +536,246 @@ form .button input:hover{
     font-weight: 500;
 }
 
+/********************************* PÁGINA AGENDAMENTO ********************************/
+/************************************************************************************/
+
+.booking-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.575), rgba(0, 0, 0, 0.897)), url(https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?cs=srgb&dl=pexels-thgusstavo-1813272.jpg&fm=jpg) no-repeat center center/cover;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    color: #000;
+    padding: 100px 0;
+}
+
+.container {
+    max-width: 700px;
+    width: 100%;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+}
+
+.container .title {
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+}
+
+.container .title::before {
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: 180px;
+    margin-bottom: -5px;
+    left: 0;
+    bottom: 0;
+    background: var(--var-yellow);
+}
+
+.container form .booking-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+
+}
+
+form .booking-form .input-box {
+    width: calc(100% / 2 - 20px);
+    margin-bottom: 15px;
+}
+
+.booking-form .input-box .booking {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.booking-form .input-box input {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 2px solid #000;
+    padding-left: 15px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.booking-form .input-box input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border: 3px solid rgb(20, 20, 240);
+    box-shadow: 0 0 5px rgba(1, 1, 238, 0.5);
+    transition: 0.2s ease-in-out;
+}
+
+.button input[type="submit"]:focus {
+    outline: none;
+    border: 3px solid blue;
+    box-shadow: 0 0 8px rgba(0, 0, 255, 0.5);
+    transition: 0.2s ease-in-out;
+}
+
+.booking-form .input-box select {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 2px solid var(--var-full-black);
+    padding-left: 15px;
+    font-size: 16px;
+    color: var(--var-full-black);
+    background: var(--var-yellow);
+    padding: 0 30px 0 15px;
+}
+
+.booking-form .input-box textarea {
+    width: 100%;
+    height: 45px;
+    padding: 15px;
+    border-radius: 5px;
+    outline: none;
+    resize: none;
+    border-color: var(--var-gray);
+    border: 3px solid var(--var-gray);
+    max-height: 250px;
+    font-size: 1rem;
+
+}
+
+.booking-form .input-box textarea:is(:focus, :valid) {
+    border-color: var(--var-full-black);
+    padding: 14px;
+    border-width: 2px;
+}
+
+textarea::-webkit-scrollbar {
+    width: 0;
+}
+
+.booking-form .input-box input:focus,
+.booking-form .input-box input:valid {
+    border-color: var(--var-full-black);
+}
+
+form .button {
+    height: 45px;
+    margin: 30px 0;
+}
+
+form .button input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    color: var(--var-full-black);
+    background: #E0C70B;
+    background: linear-gradient(135deg, #E0C70B, #EFD364);
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+form .button input:hover {
+    background: #E0C70B;
+    background: linear-gradient(-135deg, #E0C70B, #EFD364);
+}
+
+
+
+/* MODAL PARA AGENDAMENTOS*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    text-align: center;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #777;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-button:hover {
+    color: #000;
+}
+
+#modalMessage {
+    margin-bottom: 25px;
+    font-size: 18px;
+    color: #333;
+}
+
+#modalOkButton {
+    background-color: #3a3a3a;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#modalOkButton:hover {
+    background-color: #000;
+}
+
 /**************** DARK MODE *******************/
-/* Apply dark mode to sobrenos section */
-[data-theme="dark"] .sobrenos-section {
+/*********************************************/
+/* [data-theme] = "dark" significa: aplique esses estilos apenas se o elemento <html> tiver um atributo chamado data-theme*/
+
+
+/* Aplica dark mode no about section */
+[data-theme="dark"] .about-section {
     background: var(--section-background);
 }
 
-[data-theme="dark"] .sobrenos-section h1 {
+[data-theme="dark"] .about-section h1 {
     color: var(--heading-color);
 }
 
-[data-theme="dark"] .sobrenos-card {
+[data-theme="dark"] .about-card {
     background: var(--card-background);
     border-color: var(--border-color);
     box-shadow: 0 10px 20px var(--shadow-color);
 }
 
-[data-theme="dark"] .sobrenos-card h3 {
+[data-theme="dark"] .about-card h3 {
     color: var(--heading-color);
 }
 
-[data-theme="dark"] .sobrenos-card p {
+[data-theme="dark"] .about-card p {
     color: var(--card-text);
 }
 
@@ -761,8 +864,16 @@ form .button input:hover{
     color: #e0e0e0;
 }
 
+/* DARK MODE FORMULÁRIO AGENDAR*/
+[data-theme="dark"] .container {
+    background-color: #252424;
+    /* or use var(--background-color) if you want it dynamic */
+    color: var(--text-color);
+    /* text will also adapt */
+}
 
-
+/********************************* BOTÕES DE ACESSIBILIDADE ********************************/
+/******************************************************************************************/
 .accessibility-card.dark-mode-toggle {
     position: relative;
 }
@@ -805,21 +916,27 @@ form .button input:hover{
     border-radius: 50%;
 }
 
-input:checked + .toggle-slider {
+input:checked+.toggle-slider {
     background-color: var(--var-yellow);
 }
 
-input:checked + .toggle-slider:before {
+input:checked+.toggle-slider:before {
     transform: translateX(18px);
 }
 
-[data-theme="dark"] input:checked + .toggle-slider {
+[data-theme="dark"] input:checked+.toggle-slider {
     background-color: var(--var-yellow);
 }
 
 /* transição suave*/
-body, .sobrenos-section, .card-section, .text-image-section, .footer,
-.sobrenos-card, .accessibility-sidebar, .accessibility-card {
+body,
+.about-section,
+.card-section,
+.text-image-section,
+.footer,
+.about-card,
+.accessibility-sidebar,
+.accessibility-card {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -827,32 +944,6 @@ body, .sobrenos-section, .card-section, .text-image-section, .footer,
 
 /* RESPONSIVIDADE */
 
-@media (max-width: 584px) { 
-    .booking-section {
-        min-height: 160vh; /* Make it taller than the screen */
-        padding-top: 30px;
-        padding-bottom: 30px;
-    }
-
-    .container {
-        max-width: 100%;
-        height: 130vh /* You can tweak this number as needed */
-    }
-
-    form .booking-form .input-box {
-        width: 100%;
-        margin-bottom: 15px;
-    }
-
-    .container form .booking-form {
-        max-height: none;
-        overflow-y: unset;
-    }
-
-    .user-details::-webkit-scrollbar {
-        width: 0;
-    }
-}
 
 
 @media (min-width: 640px) {
@@ -864,10 +955,12 @@ body, .sobrenos-section, .card-section, .text-image-section, .footer,
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 20px;
-        transform: none !important; 
+        transform: none !important;
     }
 
-    .carousel-btn { display: none !important; }
+    .carousel-btn {
+        display: none !important;
+    }
 }
 
 @media (max-width: 768px) {
@@ -885,7 +978,7 @@ body, .sobrenos-section, .card-section, .text-image-section, .footer,
         background: rgba(0, 0, 0, 0.9);
         position: absolute;
         top: 36px;
-        right: -20px; 
+        right: -20px;
         width: 200px;
         padding: 10px 0;
         text-align: center;
@@ -915,15 +1008,17 @@ body, .sobrenos-section, .card-section, .text-image-section, .footer,
         flex-direction: column;
         text-align: center;
     }
-    .navbar .logo a{
+
+    .navbar .logo a {
         font-size: 1.2rem;
     }
-    .text-image-section{
+
+    .text-image-section {
         gap: 20px;
         padding: 80px 20px;
     }
-    
-    
+
+
 }
 
 @media (max-width: 1024px) {
@@ -936,19 +1031,20 @@ body, .sobrenos-section, .card-section, .text-image-section, .footer,
         text-align: center;
     }
 }
+
 /* SOBRE NÓS */
 @media (max-width: 1200px) {
-    .sobrenos-section .cards-sobrenos-section {
+    .about-section .cards-about-section {
         flex-wrap: wrap;
     }
-    
-    .sobrenos-section .cards-sobrenos-section .sobrenos-card {
+
+    .about-section .cards-about-section .about-card {
         width: calc(50% - 30px);
     }
 }
 
 @media (max-width: 768px) {
-    .sobrenos-section .cards-sobrenos-section .sobrenos-card {
+    .about-section .cards-about-section .about-card {
         width: 100%;
     }
 }
@@ -961,17 +1057,17 @@ body, .sobrenos-section, .card-section, .text-image-section, .footer,
         width: 260px;
         right: -280px;
     }
-    
+
     .accessibility-card {
         padding: 12px;
     }
-    
+
     .accessibility-card-icon {
         width: 35px;
         height: 35px;
         margin-right: 12px;
     }
-    
+
     .accessibility-card-icon img {
         width: 18px;
         height: 18px;
@@ -984,9 +1080,11 @@ body, .sobrenos-section, .card-section, .text-image-section, .footer,
     0% {
         box-shadow: 0 0 0 0 rgba(var(--var-accessibility-rgb), 0.7);
     }
+
     70% {
         box-shadow: 0 0 0 10px rgba(var(--var-accessibility-rgb), 0);
     }
+
     100% {
         box-shadow: 0 0 0 0 rgba(var(--var-accessibility-rgb), 0);
     }
@@ -999,24 +1097,29 @@ body, .sobrenos-section, .card-section, .text-image-section, .footer,
         height: 45px;
         right: 15px;
     }
-    
+
     .accessibility-button img {
         width: 25px;
         height: 25px;
     }
 }
+/* Responsividade para o formulário de agendamento */
+@media (max-width: 768px) {
+    
 
+    .container {
+        padding: 20px;
+    }
 
+    form .booking-form {
+        flex-direction: column;
+    }
 
+    form .booking-form .input-box {
+        width: 100%;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
+    .container .title::before {
+        width: 100%;
+    }
+}

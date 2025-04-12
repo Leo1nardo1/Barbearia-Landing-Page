@@ -4,12 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const timePicker = document.getElementById('appointment_time');
     const textarea = document.querySelector("textarea");
     
-    form.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter' && event.target.tagName !== 'TEXTAREA') {
-            event.preventDefault(); // Prevents accidental submission in unexpected fields
-            form.dispatchEvent(new Event('submit')); // Manually triggers form submission
-        }
-    });
+
+   
     //Redimensionamento do textarea no formulario de agendamento
     textarea.addEventListener("keyup", e => {
         textarea.style.height = "45px";
@@ -18,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     //Masks na página de agendamento.
-    $('#date_time').mask('00/00/0000 00:00:00');
+    $('#date').mask('00/00/0000');
     $('#phone').mask('(00) 0 0000-0000');
 
     //$('.text-field').hide();
@@ -30,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         start: 9,
         end: 19,  
         interval: 30, // 30 minutos de intervalo
-        daysOff: [0] // 0 = Domingo, 6 = Sábado segundo a função selectedDay.getDay()
+        daysOff: [6] // 6 = Domingo, 1 = Segunda / segundo a função selectedDay.getDay()
     };
 
     // Estabelece que o usuário só pode escolher a data mínima de hoje
@@ -43,22 +39,22 @@ document.addEventListener('DOMContentLoaded', function () {
     maxDate.setDate(today.getDate() + 30);
     datePicker.max = formatDateForInput(maxDate);
 
-    // Add event listener to update time slots when date changes
+    // Adiciona um evento de mudança ao datePicker para atualizar os horários disponíveis
     datePicker.addEventListener('change', function () {
         updateAvailableTimeSlots(this.value);
     });
 
      // Verifica se o usuário fez um agendamento recentemente pra evitar spam
-    function hasRecentSubmission() {
-        const lastSubmissionTime = localStorage.getItem('lastSubmissionTime');
-        if (!lastSubmissionTime) {
-            return false;
-        }
-        //Calcula tempo em horas.
-        const hoursSinceLastSubmission = (Date.now() - parseInt(lastSubmissionTime)) / (1000 * 60 * 60);
+    // function hasRecentSubmission() {
+    //     const lastSubmissionTime = localStorage.getItem('lastSubmissionTime');
+    //     if (!lastSubmissionTime) {
+    //         return false;
+    //     }
+        // //Calcula tempo em horas.
+        // const hoursSinceLastSubmission = (Date.now() - parseInt(lastSubmissionTime)) / (1000 * 60 * 60);
         //retorna true ou false, a depender da quantidade de horas passadas depois do envio, nesse caso, 24 horas.
-        return hoursSinceLastSubmission < 24;
-    }
+    //     return hoursSinceLastSubmission < 24;
+    // }
 
     //Acompanha o número de envios do formulário em um dia
     function getTodaySubmissionCount() {
@@ -72,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return submissionData.count;
     }
 
-    //Update do 'count' e 'date' no acompanhamento de envio de formulários
+    //Atualização do 'count' e 'date' no acompanhamento de envio de formulários
     function updateSubmissionTracking() {
         const today = new Date().toDateString();
         const submissionData = JSON.parse(localStorage.getItem('submissionData') || '{"date":"", "count":0}');
@@ -187,33 +183,64 @@ function updateAvailableTimeSlots(selectedDate) {
         return slots;
     }
 
+
+// Função para exibir o modal
+function showModal(message, redirectUrl = null) {
+    const modal = document.getElementById('customModal');
+    const modalMessage = document.getElementById('modalMessage');
+    
+    modalMessage.textContent = message;
+    modal.style.display = 'flex';
+    modal.dataset.redirectUrl = redirectUrl || '';
+}
+
+function closeModal() {
+    const modal = document.getElementById('customModal');
+    modal.style.display = 'none';
+    
+  
+    if (modal.dataset.redirectUrl) {
+        window.location.href = modal.dataset.redirectUrl;
+    }
+}
+
+
+
+    const modal = document.getElementById('customModal');
+    const okButton = document.getElementById('modalOkButton');
+    
+    
+    //Fechar o modal ao clicar no botão "OK"
+    okButton.addEventListener('click', closeModal);
+    
+    // Fechar o modal ao clicar fora dele
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+
+    
+    
+   
     // Envio de formulário
     form.addEventListener('submit', function (event) {
         event.preventDefault();
-
-        if (hasRecentSubmission()) {
-            alert('Você já fez um agendamento recentemente. Por favor, aguarde 24 horas antes de fazer outro.');
+        
+        if (getTodaySubmissionCount() >= 2) {
+            showModal(`Limite de 2 agendamentos por dia atingido. Por favor, tente novamente amanhã.`, 'agendar.html');
             return;
         }
 
-        const dailyLimit = 1;
-        if (getTodaySubmissionCount() >= dailyLimit) {
-            alert(`Limite de ${dailyLimit} agendamentos por dia atingido. Por favor, tente novamente amanhã.`);
-            return;
-        }
-
+        //Caso esse campo esteja preenchido, o envio do formulário não será realizado.
         const honeypotField = document.getElementById('website');
         if (honeypotField && honeypotField.value) {
-            return;
+            window.location.href = 'agendar.html';
         }
 
         const appointmentDate = datePicker.value;
         const appointmentTime = timePicker.value;
-
-        if (!appointmentDate || !appointmentTime) {
-            alert('Por favor, selecione uma data e um horário para o agendamento.');
-            return;
-        }
 
         const [year, month, day] = appointmentDate.split('-');
         const formattedDateTime = `${day}/${month}/${year} ${appointmentTime}:00`;
@@ -239,7 +266,8 @@ function updateAvailableTimeSlots(selectedDate) {
         updateSubmissionTracking();
 
         
-        alert('Agendamento realizado com sucesso!');
-        window.location.href = 'agendar.html';
+        
+    showModal('Agendamento realizado com sucesso!', 'agendar.html');
     });
 });
+ 
