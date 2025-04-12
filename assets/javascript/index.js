@@ -67,12 +67,29 @@ document.addEventListener("DOMContentLoaded", function () {
     darkModeCard.addEventListener('click', function () {
         setDarkMode(!darkModeToggle.checked);
     });
-    //Reseta a acessibilidade
-    resetCard.addEventListener('click', function () {
-        setDarkMode(false);
+
+
+
+    //Reseta a acessibilidade 
+    let resetCard = null;
+    accessibilityCards.forEach(function (card) {
+        const cardText = card.querySelector('.accessibility-card-text');
+        if (cardText && cardText.textContent.trim() === 'Resetar tudo') {
+            resetCard = card;
+        }
     });
 
-    // Fecha com esc
+
+    if (resetCard) {
+        resetCard.addEventListener('click', function () {
+            setDarkMode(false);
+            //ADICIONE OUTROS RESETS AQUI
+        });
+    } else {
+        console.error("Reset card not found");
+    }
+
+    // Fecha acessibilidade com esc
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && accessibilitySidebar.classList.contains('active')) {
             closeSidebar();
@@ -91,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    
+
 
 
 
