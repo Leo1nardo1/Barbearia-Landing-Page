@@ -1,11 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
     const menuToggle = document.querySelector(".menu-toggle");
-    const navMenu = document.querySelector("nav ul");
+const navMenu = document.querySelector("nav ul");
 
-    menuToggle.addEventListener("click", function () {
-        navMenu.classList.toggle("active");
-    });
+menuToggle.addEventListener("click", function (event) {
+    event.stopPropagation(); // Impede que o clique suba até o document
+    navMenu.classList.toggle("active");
+});
 
+// Fecha o menu ao clicar fora
+document.addEventListener("click", function (event) {
+    const isClickInsideMenu = navMenu.contains(event.target);
+    const isClickOnToggle = menuToggle.contains(event.target);
+
+    if (!isClickInsideMenu && !isClickOnToggle) {
+        navMenu.classList.remove("active");
+    }
+});
     const accessibilityButton = document.getElementById('accessibilityButton');
     const accessibilitySidebar = document.getElementById('accessibilitySidebar');
     const accessibilityOverlay = document.getElementById('accessibilityOverlay');
