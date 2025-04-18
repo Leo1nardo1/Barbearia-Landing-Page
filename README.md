@@ -1,5 +1,5 @@
 # Barbearia-Landing-Page
-Bem-vindo ao repositório da Barbearia Dois Irmãos! Este projeto consiste no desenvolvimento de um site responsivo para uma barbearia localizada em Salvador, Bahia. O site conta com seções como "Sobre Nós", "Serviços", "Localização" e "Contato".
+Bem-vindo ao repositório da Barbearia Dois Irmãos! Este projeto consiste no desenvolvimento de um site responsivo para uma barbearia localizada em Salvador, Bahia. O site conta com seções como "Sobre Nós", "Agendar, "Serviços", "Localização" e "Contato".
 
  Tecnologias Utilizadas
 
@@ -9,19 +9,21 @@ HTML5 - Estrutura do site
 
 CSS3 - Estilização e layout responsivo
 
-JavaScript (opcional) - Para interações dinâmicas, como o menu lateral
+JavaScript - Para interações dinâmicas, como o menu lateral e acessibilidade
 
 Flexbox & Grid - Para organização dos elementos na página
 
- Funcionalidades
+Funcionalidades
 
-Navbar fixa e transparente, sobrepondo a imagem do herói
+Navbar fixa e transparente, sobrepondo a imagem da seção Hero
 
 Seção de "Sobre Nós" com descrição da barbearia
 
 Galeria de serviços com imagens
 
 Seção de localização com referências próximas
+
+Página de agendamento
 
 📍 Onde Nos Localizar
 

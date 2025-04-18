@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Reseta a lista de horários disponíveis, começando com a opção padrão
         timePicker.innerHTML = '<option value="">Selecione um horário</option>';
 
-        // Se nenhuma data foi selecionada, sai da função
+        // Se nenhuma data foi selecionada, encerra a função
         if (!selectedDate) {
             return;
         }
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const selectedDay = new Date(selectedDate);
         const dayOfWeek = selectedDay.getUTCDay();
 
-        // Verifica se a data selecionada é um dia de folga (presente em businessHours.daysOff)
+        // Verifica se a data selecionada é um dia de folga e indica não disponibilidade caso seja
         if (businessHours.daysOff.includes(dayOfWeek)) {
             timePicker.innerHTML = '<option value="">Não há horários disponíveis neste dia</option>';
             return;
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return false;
             })
             .map(apt => {
-                // Se houver um campo específico para o horário, retorna ele
+                // Se houver um campo específico para o horário, retorna o horário
                 if (apt.appointment_time) return apt.appointment_time;
 
                 // Caso a data e hora estejam no formato 'DD/MM/YYYY HH:MM', extrai apenas o horário (HH:MM)
