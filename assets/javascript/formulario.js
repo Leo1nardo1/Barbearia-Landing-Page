@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const datePicker = document.getElementById('appointment_date');
     const timePicker = document.getElementById('appointment_time');
     const textarea = document.querySelector("textarea");
-    
 
-   
+
+
     //Redimensionamento do textarea no formulario de agendamento
     textarea.addEventListener("keyup", e => {
         textarea.style.height = "45px";
@@ -17,16 +17,12 @@ document.addEventListener('DOMContentLoaded', function () {
     $('#date').mask('00/00/0000');
     $('#phone').mask('(00) 0 0000-0000');
 
-    //$('.text-field').hide();
-    // or
-    //$('.text-field').addClass('hide');
-
     // Configuração de horário comercial
     const businessHours = {
         start: 9,
-        end: 19,  
+        end: 19,
         interval: 30, // 30 minutos de intervalo
-        daysOff: [6] // 6 = Domingo, 1 = Segunda / segundo a função selectedDay.getDay()
+        daysOff: [0] // 6 = Sábado, 0 = Domingo / segundo a função selectedDay.getUTCDay()
     };
 
     // Estabelece que o usuário só pode escolher a data mínima de hoje
@@ -44,15 +40,15 @@ document.addEventListener('DOMContentLoaded', function () {
         updateAvailableTimeSlots(this.value);
     });
 
-     // Verifica se o usuário fez um agendamento recentemente pra evitar spam
+    // Verifica se o usuário fez um agendamento recentemente pra evitar spam
     // function hasRecentSubmission() {
     //     const lastSubmissionTime = localStorage.getItem('lastSubmissionTime');
     //     if (!lastSubmissionTime) {
     //         return false;
     //     }
-        // //Calcula tempo em horas.
-        // const hoursSinceLastSubmission = (Date.now() - parseInt(lastSubmissionTime)) / (1000 * 60 * 60);
-        //retorna true ou false, a depender da quantidade de horas passadas depois do envio, nesse caso, 24 horas.
+    // //Calcula tempo em horas.
+    // const hoursSinceLastSubmission = (Date.now() - parseInt(lastSubmissionTime)) / (1000 * 60 * 60);
+    //retorna true ou false, a depender da quantidade de horas passadas depois do envio, nesse caso, 24 horas.
     //     return hoursSinceLastSubmission < 24;
     // }
 
@@ -91,77 +87,77 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Atualiza os horários disponíveis com base na data selecionada e nos agendamentos existentes
-function updateAvailableTimeSlots(selectedDate) {
-    // Reseta a lista de horários disponíveis, começando com a opção padrão
-    timePicker.innerHTML = '<option value="">Selecione um horário</option>';
+    function updateAvailableTimeSlots(selectedDate) {
+        // Reseta a lista de horários disponíveis, começando com a opção padrão
+        timePicker.innerHTML = '<option value="">Selecione um horário</option>';
 
-    // Se nenhuma data foi selecionada, sai da função
-    if (!selectedDate) {
-        return;
-    }
+        // Se nenhuma data foi selecionada, sai da função
+        if (!selectedDate) {
+            return;
+        }
 
-    // Converte a data selecionada para um objeto Date e obtém o dia da semana (0 = Domingo, 6 = Sábado)
-    const selectedDay = new Date(selectedDate);
-    const dayOfWeek = selectedDay.getDay();
+        // Converte a data selecionada para um objeto Date e obtém o dia da semana (0 = Domingo, 6 = Sábado)
+        const selectedDay = new Date(selectedDate);
+        const dayOfWeek = selectedDay.getUTCDay();
 
-    // Verifica se a data selecionada é um dia de folga (presente em businessHours.daysOff)
-    if (businessHours.daysOff.includes(dayOfWeek)) {
-        timePicker.innerHTML = '<option value="">Não há horários disponíveis neste dia</option>';
-        return;
-    }
+        // Verifica se a data selecionada é um dia de folga (presente em businessHours.daysOff)
+        if (businessHours.daysOff.includes(dayOfWeek)) {
+            timePicker.innerHTML = '<option value="">Não há horários disponíveis neste dia</option>';
+            return;
+        }
 
-    // Recupera os agendamentos salvos no localStorage (se houver) e converte para array
-    const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+        // Recupera os agendamentos salvos no localStorage (se houver) e converte para array
+        const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
 
-    // Gera os horários disponíveis com base no horário de funcionamento e intervalo definido
-    const timeSlots = generateTimeSlots(businessHours.start, businessHours.end, businessHours.interval);
+        // Gera os horários disponíveis com base no horário de funcionamento e intervalo definido
+        const timeSlots = generateTimeSlots(businessHours.start, businessHours.end, businessHours.interval);
 
-    // Filtra os horários já reservados para a data selecionada
-    const bookedTimes = appointments
-        .filter(apt => {
-            // Se houver um campo 'appointment_date', verifica se coincide com a data selecionada
-            if (apt.appointment_date) {
-                return apt.appointment_date === selectedDate;
+        // Filtra os horários já reservados para a data selecionada
+        const bookedTimes = appointments
+            .filter(apt => {
+                // Se houver um campo 'appointment_date', verifica se coincide com a data selecionada
+                if (apt.appointment_date) {
+                    return apt.appointment_date === selectedDate;
+                }
+
+                // Se a data vier no formato 'DD/MM/YYYY HH:MM', converte para 'YYYY-MM-DD' antes de comparar
+                if (apt.date_time) {
+                    const aptDate = apt.date_time.split(' ')[0];
+                    const [day, month, year] = aptDate.split('/');
+                    const formattedDate = `${year}-${month}-${day}`;
+                    return formattedDate === selectedDate;
+                }
+
+                return false;
+            })
+            .map(apt => {
+                // Se houver um campo específico para o horário, retorna ele
+                if (apt.appointment_time) return apt.appointment_time;
+
+                // Caso a data e hora estejam no formato 'DD/MM/YYYY HH:MM', extrai apenas o horário (HH:MM)
+                if (apt.date_time) {
+                    const aptTime = apt.date_time.split(' ')[1];
+                    return aptTime.substring(0, 5); // Remove segundos, deixando apenas HH:MM
+                }
+
+                return '';
+            });
+
+        // Adiciona os horários disponíveis ao seletor, ignorando os que já foram reservados
+        timeSlots.forEach(slot => {
+            if (!bookedTimes.includes(slot)) {
+                const option = document.createElement('option');
+                option.value = slot;
+                option.textContent = slot;
+                timePicker.appendChild(option);
             }
-
-            // Se a data vier no formato 'DD/MM/YYYY HH:MM', converte para 'YYYY-MM-DD' antes de comparar
-            if (apt.date_time) {
-                const aptDate = apt.date_time.split(' ')[0]; 
-                const [day, month, year] = aptDate.split('/');
-                const formattedDate = `${year}-${month}-${day}`;
-                return formattedDate === selectedDate;
-            }
-
-            return false;
-        })
-        .map(apt => {
-            // Se houver um campo específico para o horário, retorna ele
-            if (apt.appointment_time) return apt.appointment_time;
-
-            // Caso a data e hora estejam no formato 'DD/MM/YYYY HH:MM', extrai apenas o horário (HH:MM)
-            if (apt.date_time) {
-                const aptTime = apt.date_time.split(' ')[1];
-                return aptTime.substring(0, 5); // Remove segundos, deixando apenas HH:MM
-            }
-
-            return '';
         });
 
-    // Adiciona os horários disponíveis ao seletor, ignorando os que já foram reservados
-    timeSlots.forEach(slot => {
-        if (!bookedTimes.includes(slot)) {
-            const option = document.createElement('option');
-            option.value = slot;
-            option.textContent = slot;
-            timePicker.appendChild(option);
+        // Se após a filtragem não houver horários disponíveis, exibe a mensagem:
+        if (timePicker.options.length === 1) {
+            timePicker.innerHTML = '<option value="">Não há horários disponíveis neste dia</option>';
         }
-    });
-
-    // Se após a filtragem não houver horários disponíveis, exibe a mensagem:
-    if (timePicker.options.length === 1) {
-        timePicker.innerHTML = '<option value="">Não há horários disponíveis neste dia</option>';
     }
-}
 
 
     // Gera opções de horários do inicío (9hrs) ao fim (19 hrs)
@@ -184,50 +180,50 @@ function updateAvailableTimeSlots(selectedDate) {
     }
 
 
-// Função para exibir o modal
-function showModal(message, redirectUrl = null) {
-    const modal = document.getElementById('customModal');
-    const modalMessage = document.getElementById('modalMessage');
-    
-    modalMessage.textContent = message;
-    modal.style.display = 'flex';
-    modal.dataset.redirectUrl = redirectUrl || '';
-}
+    // Função para exibir o modal
+    function showModal(message, redirectUrl = null) {
+        const modal = document.getElementById('customModal');
+        const modalMessage = document.getElementById('modalMessage');
 
-function closeModal() {
-    const modal = document.getElementById('customModal');
-    modal.style.display = 'none';
-    
-  
-    if (modal.dataset.redirectUrl) {
-        window.location.href = modal.dataset.redirectUrl;
+        modalMessage.textContent = message;
+        modal.style.display = 'flex';
+        modal.dataset.redirectUrl = redirectUrl || '';
     }
-}
+
+    function closeModal() {
+        const modal = document.getElementById('customModal');
+        modal.style.display = 'none';
+
+
+        if (modal.dataset.redirectUrl) {
+            window.location.href = modal.dataset.redirectUrl;
+        }
+    }
 
 
 
     const modal = document.getElementById('customModal');
     const okButton = document.getElementById('modalOkButton');
-    
-    
+
+
     //Fechar o modal ao clicar no botão "OK"
     okButton.addEventListener('click', closeModal);
-    
+
     // Fechar o modal ao clicar fora dele
-    window.addEventListener('click', function(event) {
+    window.addEventListener('click', function (event) {
         if (event.target === modal) {
             closeModal();
         }
     });
 
 
-    
-    
-   
+
+
+
     // Envio de formulário
     form.addEventListener('submit', function (event) {
         event.preventDefault();
-        
+
         if (getTodaySubmissionCount() >= 2) {
             showModal(`Limite de 2 agendamentos por dia atingido. Por favor, tente novamente amanhã.`, 'agendar.html');
             return;
@@ -265,9 +261,8 @@ function closeModal() {
 
         updateSubmissionTracking();
 
-        
-        
-    showModal('Agendamento realizado com sucesso!', 'agendar.html');
+
+
+        showModal('Agendamento realizado com sucesso!', 'agendar.html');
     });
 });
- 

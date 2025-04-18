@@ -45,11 +45,6 @@ td {
     white-space: nowrap; 
 }
 
-/* Permite wrapping aos comentários */
-td:nth-child(7) { 
-    white-space: normal; 
-}
-
 
 th, td {
     padding: 12px 15px;

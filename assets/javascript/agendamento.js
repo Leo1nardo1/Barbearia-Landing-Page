@@ -5,15 +5,27 @@ let totalPages = 0;
 
 document.addEventListener('DOMContentLoaded', function () {
     loadAppointments();
+
+    //Modal de comentários
+    document.querySelector('.close-modal').addEventListener('click', function () {
+        document.getElementById('comment-modal').style.display = 'none';
+    });
+    window.addEventListener('click', function (event) {
+        if (event.target === document.getElementById('comment-modal')) {
+            document.getElementById('comment-modal').style.display = 'none';
+        }
+    });
 });
 
+// Carrega os agendamentos
 function loadAppointments() {
+
     const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
     totalAppointments = appointments.length;
     totalPages = Math.ceil(totalAppointments / itemsPerPage);
     const tbody = document.getElementById('appointments-tbody');
     tbody.innerHTML = '';
-
+    // Trata da paginação da tabela
     if (appointments.length === 0) {
         const row = document.createElement('tr');
         row.innerHTML = '<td colspan="10" class="empty-message">Nenhum agendamento encontrado.</td>';
@@ -61,7 +73,7 @@ function loadAppointments() {
     document.getElementById('page-info').textContent = `Mostrando ${start + 1} - ${end} de ${totalAppointments} agendamentos`;
     updatePagination();
 }
-
+// Abre modal de comentário
 function openCommentModal(encodedComment) {
     const modal = document.getElementById('comment-modal');
     const modalText = document.getElementById('modal-comment-text');
@@ -69,16 +81,7 @@ function openCommentModal(encodedComment) {
     modal.style.display = 'block';
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelector('.close-modal').addEventListener('click', function () {
-        document.getElementById('comment-modal').style.display = 'none';
-    });
-    window.addEventListener('click', function (event) {
-        if (event.target === document.getElementById('comment-modal')) {
-            document.getElementById('comment-modal').style.display = 'none';
-        }
-    });
-});
+
 
 function confirmAppointment(index) {
     const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');

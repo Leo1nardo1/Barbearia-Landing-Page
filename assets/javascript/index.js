@@ -1,21 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
     const menuToggle = document.querySelector(".menu-toggle");
-const navMenu = document.querySelector("nav ul");
+    const navMenu = document.querySelector("nav ul");
 
-menuToggle.addEventListener("click", function (event) {
-    event.stopPropagation(); // Impede que o clique suba até o document
-    navMenu.classList.toggle("active");
-});
+    //Toggle menu dropdown
+    menuToggle.addEventListener("click", function () {
+        navMenu.classList.toggle("active"); 
+    });
 
-// Fecha o menu ao clicar fora
-document.addEventListener("click", function (event) {
-    const isClickInsideMenu = navMenu.contains(event.target);
-    const isClickOnToggle = menuToggle.contains(event.target);
+    // Fecha o menu ao clicar fora
+    document.addEventListener("click", function (event) {
+        //event.target retorna true ou false
+        const isClickInsideMenu = navMenu.contains(event.target);
+        const isClickOnToggle = menuToggle.contains(event.target);
 
-    if (!isClickInsideMenu && !isClickOnToggle) {
-        navMenu.classList.remove("active");
-    }
-});
+        if (!isClickInsideMenu && !isClickOnToggle) {
+            navMenu.classList.remove("active");
+        }
+    });
     const accessibilityButton = document.getElementById('accessibilityButton');
     const accessibilitySidebar = document.getElementById('accessibilitySidebar');
     const accessibilityOverlay = document.getElementById('accessibilityOverlay');
@@ -40,7 +41,7 @@ document.addEventListener("click", function (event) {
     accessibilityButton.addEventListener('click', function () {
         accessibilitySidebar.classList.add('active');
         accessibilityOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden'; // Bloqueia a página de rolar
     });
 
     // FECHA SIDEBAR AO CLICAR NO BOTÃO DE FECHAR
@@ -95,7 +96,7 @@ document.addEventListener("click", function (event) {
             setDarkMode(false);
             //ADICIONE OUTROS RESETS AQUI
         });
-    } 
+    }
 
     // Fecha acessibilidade com esc
     document.addEventListener('keydown', function (e) {
@@ -123,6 +124,7 @@ document.addEventListener("click", function (event) {
 
 });
 
+//Move o slide
 let index = 0;
 
 function moveSlide(direction) {
