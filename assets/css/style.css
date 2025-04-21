@@ -287,15 +287,26 @@ nav ul li a:hover {
 
 
 
-/************************ Card Grid *****************************/
+/************************ SEÇÃO DE GALERIA *****************************/
 .card-section {
-    padding: 50px 20px;
+    padding: 60px 20px;
     text-align: center;
 }
 
 .card-section .card-container .card-title h1 {
     font-size: 2.8rem;
-    margin-bottom: 30px;
+    position: relative;
+    margin-bottom: 60px;
+}
+.card-title h1::after {
+    content: '';
+    position: absolute;
+    width: 250px;
+    height: 4px;
+    background: var(--var-yellow);
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 
@@ -371,10 +382,14 @@ nav ul li a:hover {
 
 .location-card iframe {
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     height: 300px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.text-content h2{
+    font-size: 2.5rem;
+    margin-bottom: 14px;
 }
 
 /******************* Footer ***********************/
