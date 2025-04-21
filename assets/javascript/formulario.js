@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return false;
             })
             .map(apt => {
-                // Se houver um campo específico para o horário, retorna o horário
+                
                 if (apt.appointment_time) return apt.appointment_time;
 
                 // Caso a data e hora estejam no formato 'DD/MM/YYYY HH:MM', extrai apenas o horário (HH:MM)

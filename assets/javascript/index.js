@@ -2,9 +2,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const menuToggle = document.querySelector(".menu-toggle");
     const navMenu = document.querySelector("nav ul");
 
+    const accessibilityButton = document.getElementById('accessibilityButton');
+    const accessibilitySidebar = document.getElementById('accessibilitySidebar');
+    const accessibilityOverlay = document.getElementById('accessibilityOverlay');
+    const accessibilityClose = document.getElementById('accessibilityClose');
+    const accessibilityCards = document.querySelectorAll('.accessibility-card');
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const darkModeCard = document.querySelector('.accessibility-card.dark-mode-toggle');
+    const dyslexicCard = document.querySelector('.accessibility-card.dyslexic-mode-card');
+    const fontSizeCard = document.querySelector('.accessibility-card.text-size-card');
+    const highlightCard = document.querySelector('.accessibility-card.highlight-links');
+    const cursorSizeCard = document.querySelector('.accessibility-card.cursor-size-card');
+    const textSpacingCard = document.querySelector('.accessibility-card.text-spacing');
+
+
+    /******************* MENU DROPDOWN **************************/
+
     //Toggle menu dropdown
     menuToggle.addEventListener("click", function () {
-        navMenu.classList.toggle("active"); 
+        navMenu.classList.toggle("active");
     });
 
     // Fecha o menu ao clicar fora
@@ -17,16 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
             navMenu.classList.remove("active");
         }
     });
-    const accessibilityButton = document.getElementById('accessibilityButton');
-    const accessibilitySidebar = document.getElementById('accessibilitySidebar');
-    const accessibilityOverlay = document.getElementById('accessibilityOverlay');
-    const accessibilityClose = document.getElementById('accessibilityClose');
-    const accessibilityCards = document.querySelectorAll('.accessibility-card');
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const darkModeCard = document.querySelector('.accessibility-card.dark-mode-toggle');
 
-
-    //DARK MODE 
+    /**************** MODO ESCURO *****************/
 
     // CHECA localStorage, SE NÃO HOUVER NENHUM TEMA SALVO, O TEMA CLARO É ARMAZENADO NA CONSTANTE
     const currentTheme = localStorage.getItem('theme') || 'light';
@@ -36,8 +44,24 @@ document.addEventListener("DOMContentLoaded", function () {
         document.documentElement.setAttribute('data-theme', 'dark');
         darkModeToggle.checked = true;
     }
+    function setDarkMode(enabled) {
+        document.documentElement.setAttribute('data-theme', enabled ? 'dark' : 'light');
+        localStorage.setItem('theme', enabled ? 'dark' : 'light');
+        darkModeToggle.checked = enabled;
+    }
 
-    // ABRE O SIDEBAR AO CLICAR NO BOTAO DE ACESSIBILIDADE
+    // Dark Mode ao clicar no toggle 
+    darkModeToggle.addEventListener('change', function () {
+        setDarkMode(this.checked);
+    });
+
+    //Aciona o evento ao clicar no card e não apenas no toggle
+    darkModeCard.addEventListener('click', function () {
+        setDarkMode(!darkModeToggle.checked);
+    });
+
+
+    /************* ABRE O SIDEBAR DE ACESSIBILIDADE **************/
     accessibilityButton.addEventListener('click', function () {
         accessibilitySidebar.classList.add('active');
         accessibilityOverlay.classList.add('active');
@@ -54,34 +78,188 @@ document.addEventListener("DOMContentLoaded", function () {
         closeSidebar();
     });
 
-    // FECHA SIDEBAR
+    // FUNÇÃO PARA FECHAR SIDEBAR
     function closeSidebar() {
         accessibilitySidebar.classList.remove('active');
         accessibilityOverlay.classList.remove('active');
         document.body.style.overflow = ''; // Permite rolar a página novamente
     }
 
-    function setDarkMode(enabled) {
-        //Acessa o documento HTML e aplica o tema desejado, "enable" deve ser true para dark mode e false para light mode.
-        document.documentElement.setAttribute('data-theme', enabled ? 'dark' : 'light');
 
-        localStorage.setItem('theme', enabled ? 'dark' : 'light');
-        darkModeToggle.checked = enabled;
+
+    /********************** TAMANHO DA FONTE **************************/
+    function setFontSize(size) {
+        document.documentElement.style.setProperty('--font-size-multiplier', size);
+        localStorage.setItem('fontSize', size);
+
+        if (size > 1) {
+            fontSizeCard.classList.add('active');
+        } else {
+            fontSizeCard.classList.remove('active');
+        }
+    }
+    const savedFontSize = localStorage.getItem('fontSize');
+    if (savedFontSize) {
+        setFontSize(parseFloat(savedFontSize));
     }
 
-    // Dark Mode ao clicar no toggle 
-    darkModeToggle.addEventListener('change', function () {
-        //retorna true or false
-        setDarkMode(this.checked);
-    });
-    //Aciona o evento ao clicar no card e não apenas no toggle
-    darkModeCard.addEventListener('click', function () {
-        setDarkMode(!darkModeToggle.checked);
-    });
+    if (fontSizeCard) {
+        fontSizeCard.addEventListener('click', function () {
+            const currentMultiplier = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-size-multiplier')) || 1;
+
+            let newSize;
+
+            if (currentMultiplier >= 1.5) {
+                newSize = 1;
+            } else {
+                newSize = 1.5;
+            }
+
+            setFontSize(newSize);
+        });
+    }
+    /********************** DESTACAR LINKS  **************************/
+    function setHighlight(enabled) {
+        if (enabled) {
+            let highlightStyle = document.getElementById('highlight-links-style');
+            if (!highlightStyle) {
+                highlightStyle = document.createElement('style');
+                highlightStyle.id = 'highlight-links-style';
+                document.head.appendChild(highlightStyle);
+            }
+            highlightStyle.textContent = 'body a { outline: 2px solid red; }';
+
+            highlightCard.classList.add('active');
+
+            localStorage.setItem('highlightLinks', 'enabled');
+        } else {
+            const highlightStyle = document.getElementById('highlight-links-style');
+            if (highlightStyle) {
+                highlightStyle.textContent = '';
+            }
+
+            highlightCard.classList.remove('active');
+
+            localStorage.setItem('highlightLinks', 'disabled');
+        }
+    }
+    if (localStorage.getItem('highlightLinks') === 'enabled') {
+        setHighlight(true);
+    }
+
+    if (highlightCard) {
+        highlightCard.addEventListener('click', function () {
+            const isCurrentlyEnabled = highlightCard.classList.contains('active');
+            setHighlight(!isCurrentlyEnabled);
+        });
+    }
+
+    /********************* ESPAÇAMENTO DE TEXTO *********************/
+    function setTextSpacing(enabled){
+        if(enabled){
+            let textSpacingStyle = document.getElementById('text-spacing-style');
+            if(!textSpacingStyle){
+                textSpacingStyle = document.createElement('style');
+                textSpacingStyle.id = 'text-spacing-style';
+                document.head.appendChild(textSpacingStyle);
+            }
+            textSpacingStyle.textContent = 'body p { word-spacing: 14px; }';
+
+            textSpacingCard.classList.add('active');
+
+            localStorage.setItem('textSpacing','enabled');
+        } else {
+            const textSpacingStyle = document.getElementById('text-spacing-style');
+            if(textSpacingStyle){
+                textSpacingStyle.textContent = '';
+            }
+
+            textSpacingCard.classList.remove('active');
+            localStorage.setItem('textSpacing', 'disabled');
+        }
+    }
+
+    if(localStorage.getItem('textSpacing') === 'enabled'){
+        setTextSpacing(true);
+    }
+
+    if(textSpacingCard) {
+        textSpacingCard.addEventListener('click', function () {
+            const isEnabled = textSpacingCard.classList.contains('active');
+            setTextSpacing(!isEnabled);
+        });
+    }
+
+    /******************* MODO DISLÉXICO **********************/
+
+    function setDyslexicFont(enabled) {
+        if (enabled) {
+            document.body.style.fontFamily = "'Open-Dyslexic', sans-serif";
+            dyslexicCard.classList.add('active');
+            localStorage.setItem('dyslexicFont', 'enabled');
+        } else {
+            document.body.style.fontFamily = '';
+            dyslexicCard.classList.remove('active');
+            localStorage.setItem('dyslexicFont', 'disabled');
+        }
+    }
+    if (localStorage.getItem('dyslexicFont') === 'enabled') {
+        setDyslexicFont(true);
+    }
 
 
+    if (dyslexicCard) {
+        dyslexicCard.addEventListener('click', function () {
+            const isCurrentlyEnabled = dyslexicCard.classList.contains('active');
+            setDyslexicFont(!isCurrentlyEnabled);
+        });
+    }
 
-    //Reseta a acessibilidade 
+    /******************* CURSOR MAIOR **********************/
+    function setCustomCursor(enabled) {
+        if (enabled) {
+            // Create a style element if it doesn't exist
+            let cursorStyle = document.getElementById('custom-cursor-style');
+            if (!cursorStyle) {
+                cursorStyle = document.createElement('style');
+                cursorStyle.id = 'custom-cursor-style';
+                document.head.appendChild(cursorStyle);
+            }
+
+            cursorStyle.textContent = `
+            * {
+                cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24"><path fill="%23FF0000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path></svg>'), auto;
+            }
+        `;
+
+            cursorSizeCard.classList.add('active');
+
+            localStorage.setItem('customCursor', 'enabled');
+        } else {
+            const cursorStyle = document.getElementById('custom-cursor-style');
+            if (cursorStyle) {
+                cursorStyle.textContent = '';
+            }
+
+            cursorSizeCard.classList.remove('active');
+
+            localStorage.setItem('customCursor', 'disabled');
+        }
+    }
+
+    if (localStorage.getItem('customCursor') === 'enabled') {
+        setCustomCursor(true);
+    }
+
+    if (cursorSizeCard) {
+        cursorSizeCard.addEventListener('click', function () {
+            const isCurrentlyEnabled = cursorSizeCard.classList.contains('active');
+            setCustomCursor(!isCurrentlyEnabled);
+        });
+    }
+
+    /******************* RESETA ACESSIBILIDADE **********************/
+    //Maneira de acessar o cartão correspondente de maneira não tradicional, através do conteúdo do texto.
     let resetCard = null;
     accessibilityCards.forEach(function (card) {
         const cardText = card.querySelector('.accessibility-card-text');
@@ -91,9 +269,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
+
     if (resetCard) {
         resetCard.addEventListener('click', function () {
             setDarkMode(false);
+            setFontSize(1);
+            setHighlight(false);
+            setDyslexicFont(false);
+            setCustomCursor(false);
+            setTextSpacing(false);
             //ADICIONE OUTROS RESETS AQUI
         });
     }
@@ -121,7 +305,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
+    // Fim do DOMContentLoaded
 });
 
 //Move o slide

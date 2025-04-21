@@ -1,14 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Rowdies:wght@300;400;700&display=swap');
 @import url('https://fonts.cdnfonts.com/css/open-dyslexic');
-/* * {
-    outline: 1px solid red; SERVE PARA DESTACAR TODOS OS ELEMENTOS DA PÁGINA
-  } */
+ 
 
-
-/*Permite um rolamento suave ao clicar nos links que direcionam as seções da página*/
-html {
-    scroll-behavior: smooth;
-}
 
 :root {
     --var-yellow: #FEBE10;
@@ -25,6 +18,7 @@ html {
     --heading-color: #333;
     --border-color: #ffc107;
     --shadow-color: rgba(0, 0, 0, 0.1);
+    --font-size-multiplier: 1;
 }
 
 [data-theme="dark"] {
@@ -41,10 +35,18 @@ html {
 }
 
 
+
+
+
+/*Layout da página*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
+}
+
+body{
     font-family: 'Poppins', sans-serif;
 }
 
@@ -53,7 +55,30 @@ html {
     grid-template-rows: auto auto auto auto auto auto;
     grid-template-columns: 1fr;
     min-height: 100vh;
+    
 }
+
+/*Tamanho do texto / Acessibilidade */
+
+html {
+    scroll-behavior: smooth;
+    font-size: calc(100% * var(--font-size-multiplier));
+    
+}
+h1 {
+    font-size: calc(clamp(2rem, 6vw, 6rem) * var(--font-size-multiplier));
+}
+
+h2 {
+    font-size: calc(clamp(1.5rem, 4vw, 3rem) * var(--font-size-multiplier));
+}
+
+h3 {
+    font-size: calc(clamp(1.2rem, 3vw, 2.5rem) * var(--font-size-multiplier));
+}
+
+
+
 
 /* Navbar */
 .navbar {
@@ -95,7 +120,6 @@ nav ul li a {
     font-size: 1.2rem;
     text-decoration: none;
     color: var(--var-yellow);
-    font-family: "Cabin", sans-serif;
 }
 
 nav ul li a:hover {
@@ -161,7 +185,6 @@ nav ul li a:hover {
     border-radius: 30px;
     text-decoration: none;
     transition: all 0.3s ease;
-    font-family: "Rowdies", sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -264,14 +287,13 @@ nav ul li a:hover {
 
 
 
-/* Card Grid */
+/************************ Card Grid *****************************/
 .card-section {
     padding: 50px 20px;
     text-align: center;
 }
 
 .card-section .card-container .card-title h1 {
-    font-family: "Cabin", sans-serif;
     font-size: 2.8rem;
     margin-bottom: 30px;
 }
@@ -300,7 +322,7 @@ nav ul li a:hover {
 
 .carousel-btn {
     position: absolute;
-    top: 50%;
+    top: 60%;
     transform: translateY(-50%);
     background: rgba(0, 0, 0, 0.5);
     color: white;
@@ -331,6 +353,7 @@ nav ul li a:hover {
     height: 100%;
     object-fit: cover;
 }
+/*************** SEÇÃO DE LOCALIZAÇÃO *****************/
 
 .text-image-section {
     display: grid;
@@ -338,6 +361,7 @@ nav ul li a:hover {
     padding: 50px;
     align-items: center;
     background: var(--var-gray);
+    font-size: 1.2rem;
 }
 
 .location-card {
@@ -353,7 +377,7 @@ nav ul li a:hover {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Footer */
+/******************* Footer ***********************/
 .footer {
     background: #222;
     color: white;
@@ -378,6 +402,7 @@ nav ul li a:hover {
 .footer .icons a {
     text-decoration: none;
     color: var(--var-white);
+    padding-top: 14px;
 }
 
 
@@ -457,8 +482,8 @@ nav ul li a:hover {
 /* BOTÃO DE FECHAMENTO SIDEBAR */
 .accessibility-close {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 30px;
+    right: 25px;
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -537,6 +562,32 @@ nav ul li a:hover {
     font-weight: 500;
 }
 
+/*Efeitos nos botões de acessibilidade*/
+.accessibility-card.active {
+    border-color: var(--var-yellow);
+    background-color: rgba(255, 255, 0, 0.1); 
+}
+
+.accessibility-card.active:hover {
+    border-color: var(--var-yellow);
+    background-color: rgba(255, 255, 0, 0.2); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+[data-theme="dark"] .accessibility-card.active {
+    border-color: var(--var-yellow);
+    background-color: rgba(255, 255, 0, 0.1); 
+}
+[data-theme="dark"] .accessibility-card.active:hover {
+    border-color: var(--var-yellow);
+    background-color: rgba(255, 255, 0, 0.2); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+
+
 /********************************* PÁGINA AGENDAMENTO ********************************/
 /************************************************************************************/
 
@@ -546,7 +597,6 @@ nav ul li a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Poppins', sans-serif;
     color: #000;
     padding: 100px 0;
 }
@@ -923,6 +973,7 @@ input:checked+.toggle-slider {
 
 input:checked+.toggle-slider:before {
     transform: translateX(18px);
+    
 }
 
 [data-theme="dark"] input:checked+.toggle-slider {
