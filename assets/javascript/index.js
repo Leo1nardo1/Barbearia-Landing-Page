@@ -323,3 +323,65 @@ function moveSlide(direction) {
     document.querySelector(".card-grid").style.transform = `translateX(${offset}%)`;
 }
 
+// animação popIn em "Sobre Nós"
+
+document.addEventListener('DOMContentLoaded', () => {
+    const aboutCards = Array.from(document.querySelectorAll('.about-card'));
+    const originalAnims = aboutCards.map(card =>
+      window.getComputedStyle(card).animation
+    );
+  
+    aboutCards.forEach(card => {
+      card.style.animation = 'none';
+    });
+  
+    const section = document.querySelector('.about-section');
+  
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          aboutCards.forEach((card, i) => {
+            void card.offsetWidth;
+            card.style.animation = originalAnims[i];
+          });
+  
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.6
+    });
+  
+    observer.observe(section);
+  });
+  
+//ativa a animação de fade-in da "Galeria"
+document.addEventListener('DOMContentLoaded', () => {
+
+    const cards = Array.from(document.querySelectorAll('.card'));
+    const originalAnims = cards.map(card =>
+      window.getComputedStyle(card).animation
+    );
+
+    cards.forEach(card => {
+      card.style.animation = 'none';
+    });
+    const section = document.querySelector('.card-section');
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          cards.forEach((card, i) => {
+            void card.offsetWidth;
+            card.style.animation = originalAnims[i];
+          });
+          
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.5  
+    });
+  
+    observer.observe(section);
+  });
+  

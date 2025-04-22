@@ -195,6 +195,26 @@ nav ul li a:hover {
     transform: translateY(-5px);
 }
 
+/*animação de popIn para o about-card*/
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+    }
+
+    60% {
+        transform: scale(0.8);
+    }
+
+    80% {
+        transform: scale(0.6);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 /* Sobre Nós Section */
 .about-section {
     display: flex;
@@ -254,6 +274,7 @@ nav ul li a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: popIn 0.8s;
 }
 
 .about-section .cards-about-section .about-card:hover {
@@ -284,8 +305,19 @@ nav ul li a:hover {
     color: #333;
 }
 
+/*animação das imagens*/
 
+@keyframes entrada-saida {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
 
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
 
 /************************ SEÇÃO DE GALERIA *****************************/
 .card-section {
@@ -329,6 +361,7 @@ nav ul li a:hover {
     flex: 0 0 100%;
     max-width: 100%;
     transition: transform 0.3s ease-in-out;
+    animation: entrada-saida 3s;
 }
 
 .carousel-btn {
