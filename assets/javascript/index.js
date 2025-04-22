@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /******************* CURSOR MAIOR **********************/
     function setCustomCursor(enabled) {
         if (enabled) {
-            // Create a style element if it doesn't exist
+            
             let cursorStyle = document.getElementById('custom-cursor-style');
             if (!cursorStyle) {
                 cursorStyle = document.createElement('style');
