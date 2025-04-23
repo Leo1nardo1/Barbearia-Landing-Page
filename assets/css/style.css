@@ -775,16 +775,30 @@ form .button input {
     color: var(--var-full-black);
     background: #E0C70B;
     background: linear-gradient(135deg, #E0C70B, #EFD364);
-    font-size: 18px;
+    font-size: 25px;
     font-weight: 600;
     border-radius: 5px;
     letter-spacing: 1px;
     cursor: pointer;
+    padding: 0 50px;
 }
 
 form .button input:hover {
     background: #E0C70B;
     background: linear-gradient(-135deg, #E0C70B, #EFD364);
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px;
+}
+.checkbox-container input[type="checkbox"] {
+    margin-left: 10px;
+}
+.checkbox-container label {
+    font-size: 14px;
+    color: #333;
 }
 
 

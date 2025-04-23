@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" dathemeta-="light">
+<html lang="pt-br" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -38,7 +38,7 @@
             </div>
 
             <!-- Card 2 -->
-            <div class="accessibility-card text-size-card">
+            <div class="accessibility-card">
                 <div class="accessibility-card-icon">
                     <img src="assets/images/font.png" alt="Tamanho do texto">
                 </div>
@@ -46,15 +46,15 @@
             </div>
 
             <!-- Card 3 -->
-            <div class="accessibility-card highlight-links">
+            <div class="accessibility-card">
                 <div class="accessibility-card-icon">
                     <img src="assets/images/marker.png" alt="Destacar Elementos">
                 </div>
-                <div class="accessibility-card-text">Destacar Links</div>
+                <div class="accessibility-card-text">Destacar elementos</div>
             </div>
 
             <!-- Card 4 -->
-            <div class="accessibility-card dyslexic-mode-card">
+            <div class="accessibility-card">
                 <div class="accessibility-card-icon">
                     <img src="assets/images/dyslexia.png" alt="Fonte de dislexia">
                 </div>
@@ -62,15 +62,15 @@
             </div>
 
             <!-- Card 5 -->
-            <div class="accessibility-card cursor-size-card">
+            <div class="accessibility-card">
                 <div class="accessibility-card-icon">
                     <img src="assets/images/cursor.png" alt="Cursor Maior">
                 </div>
                 <div class="accessibility-card-text">Cursor maior</div>
             </div>
-            
+
             <!-- Card 6 -->
-            <div class="accessibility-card text-spacing">
+            <div class="accessibility-card">
                 <div class="accessibility-card-icon">
                     <img src="assets/images/text-spacing.png" alt="Espaçamento de texto">
                 </div>
@@ -149,8 +149,23 @@
                             </select>
                         </div>
                         <div class="input-box">
+                            <span class="booking">Forma de Pagamento</span>
+                            <select name="payment" id="payment" required>
+                                <option value="">Selecione uma opção</option>
+                                <option value="credit_card">Cartão</option>
+                                <option value="pix">Pix</option>
+                                <option value="money">Dinheiro</option>
+                            </select>
+                        </div>
+                        <div class="input-box">
                             <span class="booking">Comentário adicional (opcional)</span>
                             <textarea name="comment" id="comment" maxlength="255" placeholder="Escreva seu comentário..."></textarea>
+                        </div>
+                        <div class="checkbox-container">
+                            <span class="booking"> Termos e Condições</span>
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <label for="terms">Li e aceito os termos e condições.</label>
                         </div>
                     </div>
                     <div class="button">
