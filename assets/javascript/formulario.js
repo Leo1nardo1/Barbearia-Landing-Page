@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        if (getTodaySubmissionCount() >= 2) {
+        if (getTodaySubmissionCount() >= 5) {
             showModal(`Limite de 2 agendamentos por dia atingido. Por favor, tente novamente amanhã.`, 'agendar.html');
             return;
         }
@@ -250,6 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
             appointment_time: appointmentTime,
             service: form.elements['service'].value,
             barber: form.elements['barber'].value,
+            payment: form.elements['payment'].value,
             comment: form.elements['comment'].value,
             timestamp: new Date().toISOString()
         };

@@ -37,6 +37,7 @@ function loadAppointments() {
 
     const serviceMap = { 'beard': 'Barba', 'hair': 'Cabelo', 'package': 'Conjunto' };
     const barberMap = { 'barber1': 'Barbeiro 1', 'barber2': 'Barbeiro 2' };
+    const payment = { 'credit_card': 'Cartão de crédito', 'pix': 'Pix','money': 'Dinheiro' };
     const start = (currentPage - 1) * itemsPerPage;
     const end = Math.min(start + itemsPerPage, appointments.length);
     const paginatedAppointments = appointments.slice(start, end);
@@ -55,6 +56,7 @@ function loadAppointments() {
                     <td>${appointment.date_time}</td>
                     <td>${serviceMap[appointment.service] || appointment.service}</td>
                     <td>${barberMap[appointment.barber] || appointment.barber}</td>
+                    <td>${payment[appointment.payment] || appointment.payment}</td>
                     <td><button class="btn-view-comment" onclick="openCommentModal('${encodeURIComponent(appointment.comment || 'Nenhum comentário')}')">Ver comentário</button></td>
                     <td>${new Date(appointment.timestamp).toLocaleString()}</td>
                     <td class="status-${appointment.status}">${appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}</td>

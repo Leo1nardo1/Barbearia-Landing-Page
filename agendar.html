@@ -68,7 +68,7 @@
                 </div>
                 <div class="accessibility-card-text">Cursor maior</div>
             </div>
-            
+
             <!-- Card 6 -->
             <div class="accessibility-card text-spacing">
                 <div class="accessibility-card-icon">
@@ -149,8 +149,23 @@
                             </select>
                         </div>
                         <div class="input-box">
+                            <span class="booking">Forma de Pagamento</span>
+                            <select name="payment" id="payment" required>
+                                <option value="">Selecione uma opção</option>
+                                <option value="credit_card">Cartão</option>
+                                <option value="pix">Pix</option>
+                                <option value="money">Dinheiro</option>
+                            </select>
+                        </div>
+                        <div class="input-box">
                             <span class="booking">Comentário adicional (opcional)</span>
                             <textarea name="comment" id="comment" maxlength="255" placeholder="Escreva seu comentário..."></textarea>
+                        </div>
+                        <div class="checkbox-container">
+                            <span class="booking"> Termos e Condições</span>
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <label for="terms">Li e aceito os termos e condições.</label>
                         </div>
                     </div>
                     <div class="button">
