@@ -1040,11 +1040,23 @@ body,
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Animação no botão */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(var(--var-accessibility-rgb), 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(var(--var-accessibility-rgb), 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(var(--var-accessibility-rgb), 0);
+    }
+}
 
 
 /* RESPONSIVIDADE */
-
-
 
 @media (min-width: 640px) {
     .card-container {
@@ -1063,7 +1075,9 @@ body,
     }
 }
 
+
 @media (max-width: 768px) {
+    /*Navbar*/
     .menu-toggle {
         display: block;
     }
@@ -1118,7 +1132,55 @@ body,
         padding: 80px 20px;
     }
 
+    .container {
+        padding: 20px;
+    }
 
+    form .booking-form {
+        flex-direction: column;
+    }
+
+    form .booking-form .input-box {
+        width: 100%;
+    }
+
+    .container .title::before {
+        width: 100%;
+    }
+    /*Sobre nós*/
+    .about-section .cards-about-section .about-card {
+        width: 100%;
+    }
+    /*Acessibilidade*/
+    .accessibility-button {
+        width: 45px;
+        height: 45px;
+        right: 15px;
+    }
+
+    .accessibility-button img {
+        width: 25px;
+        height: 25px;
+    }
+    .accessibility-sidebar {
+        width: 260px;
+        right: -280px;
+    }
+
+    .accessibility-card {
+        padding: 12px;
+    }
+
+    .accessibility-card-icon {
+        width: 35px;
+        height: 35px;
+        margin-right: 12px;
+    }
+
+    .accessibility-card-icon img {
+        width: 18px;
+        height: 18px;
+    }
 }
 
 @media (max-width: 1024px) {
@@ -1143,83 +1205,4 @@ body,
     }
 }
 
-@media (max-width: 768px) {
-    .about-section .cards-about-section .about-card {
-        width: 100%;
-    }
-}
 
-
-
-
-@media (max-width: 768px) {
-    .accessibility-sidebar {
-        width: 260px;
-        right: -280px;
-    }
-
-    .accessibility-card {
-        padding: 12px;
-    }
-
-    .accessibility-card-icon {
-        width: 35px;
-        height: 35px;
-        margin-right: 12px;
-    }
-
-    .accessibility-card-icon img {
-        width: 18px;
-        height: 18px;
-    }
-}
-
-
-/* Animação no botão */
-@keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(var(--var-accessibility-rgb), 0.7);
-    }
-
-    70% {
-        box-shadow: 0 0 0 10px rgba(var(--var-accessibility-rgb), 0);
-    }
-
-    100% {
-        box-shadow: 0 0 0 0 rgba(var(--var-accessibility-rgb), 0);
-    }
-}
-
-
-@media (max-width: 768px) {
-    .accessibility-button {
-        width: 45px;
-        height: 45px;
-        right: 15px;
-    }
-
-    .accessibility-button img {
-        width: 25px;
-        height: 25px;
-    }
-}
-/* Responsividade para o formulário de agendamento */
-@media (max-width: 768px) {
-    
-
-    .container {
-        padding: 20px;
-    }
-
-    form .booking-form {
-        flex-direction: column;
-    }
-
-    form .booking-form .input-box {
-        width: 100%;
-    }
-
-    .container .title::before {
-        width: 100%;
-    }
-}
