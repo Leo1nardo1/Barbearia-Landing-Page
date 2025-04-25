@@ -434,7 +434,6 @@ nav ul li a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 15px;
 }
 
 .footer .icons h1 {
