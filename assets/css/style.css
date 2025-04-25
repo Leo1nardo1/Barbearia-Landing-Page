@@ -1071,24 +1071,26 @@ body,
 
 
 /* RESPONSIVIDADE */
-
-@media (min-width: 640px) {
-    .card-container {
-        max-width: 960px;
-    }
-
+@media (max-width: 1024px) {
     .card-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-        transform: none !important;
+        grid-template-columns: repeat(2, minmax(280px, 1fr));
     }
 
-    .carousel-btn {
-        display: none !important;
+    .text-image-section {
+        grid-template-columns: 1fr;
+        text-align: center;
     }
 }
+/* SOBRE NÓS */
+@media (max-width: 1200px) {
+    .about-section .cards-about-section {
+        flex-wrap: wrap;
+    }
 
+    .about-section .cards-about-section .about-card {
+        width: calc(50% - 30px);
+    }
+}
 
 @media (max-width: 768px) {
     /*Navbar*/
@@ -1198,27 +1200,27 @@ body,
         height: 18px;
     }
 }
+@media (min-width: 640px) {
+    .card-container {
+        max-width: 960px;
+    }
 
-@media (max-width: 1024px) {
     .card-grid {
-        grid-template-columns: repeat(2, minmax(280px, 1fr));
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        transform: none !important;
     }
 
-    .text-image-section {
-        grid-template-columns: 1fr;
-        text-align: center;
+    .carousel-btn {
+        display: none !important;
     }
 }
 
-/* SOBRE NÓS */
-@media (max-width: 1200px) {
-    .about-section .cards-about-section {
-        flex-wrap: wrap;
-    }
 
-    .about-section .cards-about-section .about-card {
-        width: calc(50% - 30px);
-    }
-}
+
+
+
+
 
 
