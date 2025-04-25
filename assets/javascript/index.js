@@ -302,30 +302,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-
-
-
-    // Fim do DOMContentLoaded
-});
-
-//Move o slide
-let index = 0;
-
-function moveSlide(direction) {
-    const slides = document.querySelectorAll(".card");
-    const totalSlides = slides.length;
-    index += direction;
-
-    if (index < 0) index = totalSlides - 1;
-    if (index >= totalSlides) index = 0;
-
-    const offset = -index * 100;
-    document.querySelector(".card-grid").style.transform = `translateX(${offset}%)`;
-}
-
-// animação popIn em "Sobre Nós"
-
-document.addEventListener('DOMContentLoaded', () => {
+    // animação popIn em "Sobre Nós"
     const aboutCards = Array.from(document.querySelectorAll('.about-card'));
     const originalAnims = aboutCards.map(card =>
       window.getComputedStyle(card).animation
@@ -353,26 +330,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   
     observer.observe(section);
-  });
-  
-//ativa a animação de fade-in da "Galeria"
-document.addEventListener('DOMContentLoaded', () => {
 
+
+    //ativa a animação de fade-in da "Galeria"
     const cards = Array.from(document.querySelectorAll('.card'));
-    const originalAnims = cards.map(card =>
+    const originalAnimations = cards.map(card =>
       window.getComputedStyle(card).animation
     );
 
     cards.forEach(card => {
       card.style.animation = 'none';
     });
-    const section = document.querySelector('.card-section');
-    const observer = new IntersectionObserver((entries, obs) => {
+    const sect = document.querySelector('.card-section');
+    const obs = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           cards.forEach((card, i) => {
             void card.offsetWidth;
-            card.style.animation = originalAnims[i];
+            card.style.animation = originalAnimations[i];
           });
           
           obs.unobserve(entry.target);
@@ -382,6 +357,28 @@ document.addEventListener('DOMContentLoaded', () => {
       threshold: 0.5  
     });
   
-    observer.observe(section);
-  });
+    obs.observe(sect);
+
+    // Fim do DOMContentLoaded
+});
+
+//Move o slide
+let index = 0;
+
+function moveSlide(direction) {
+    const slides = document.querySelectorAll(".card");
+    const totalSlides = slides.length;
+    index += direction;
+
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
+
+    const offset = -index * 100;
+    document.querySelector(".card-grid").style.transform = `translateX(${offset}%)`;
+}
+
+
+
+
+
   
