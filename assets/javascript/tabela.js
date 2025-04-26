@@ -47,7 +47,7 @@ function loadAppointments() {
         if (!appointment.hasOwnProperty('status')) {
             appointment.status = 'pendente';
         }
-
+        //onclick não permite que esse código seja jogado dentro do domcontentloaded
         const row = document.createElement('tr');
         row.innerHTML = `
                     <td>${globalIndex + 1}</td>

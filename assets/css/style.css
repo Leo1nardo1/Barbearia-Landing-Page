@@ -788,20 +788,69 @@ form .button input:hover {
     background: linear-gradient(-135deg, #E0C70B, #EFD364);
 }
 
+/*Termos e condições input*/
 .checkbox-container {
     display: flex;
     align-items: center;
-    margin-bottom: 2px;
+    margin-left: 20px;
 }
-.checkbox-container input[type="checkbox"] {
-    margin-left: 10px;
-}
-.checkbox-container label {
+
+
+.check-container .terms {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    height: 40px;
+    align-content: center;
+    top: 4px;
+    cursor: pointer;
     font-size: 14px;
-    color: #333;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
-
-
+.check-container .terms input{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.checkmark {
+    position: absolute;
+    top: 7px;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #e4e2e2;
+    border: 1px solid #000;
+  }
+  .check-container .terms:hover input ~ .checkmark{
+    background-color: #ccc;
+  }
+  .check-container .terms input:checked ~ .checkmark{
+    background-color: #2196F3;
+  }
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  .terms input:checked ~ .checkmark:after {
+    display: block;
+  }
+  .terms .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
 
 /* MODAL PARA AGENDAMENTOS*/
 .modal {

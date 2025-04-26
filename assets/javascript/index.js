@@ -362,7 +362,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Fim do DOMContentLoaded
 });
 
-//Move o slide
+//Move o slide. Precisa estar fora do DOMContentLoaded porque utilizamos uma função inline (onclick="moveSlide(1)" e onclick= "moveSlide(-1)")
 let index = 0;
 
 function moveSlide(direction) {
