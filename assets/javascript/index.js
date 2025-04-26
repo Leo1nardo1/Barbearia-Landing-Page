@@ -89,32 +89,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /********************** TAMANHO DA FONTE **************************/
     function setFontSize(size) {
-        document.documentElement.style.setProperty('--font-size-multiplier', size);
+        const isMobile = window.innerWidth <= 480;
+        
+        if (isMobile && size > 1) {
+            // Tamanho de fonte mobile
+            document.documentElement.style.setProperty('--font-size-multiplier', 1 + (size - 1) * 0.6);
+        } else {
+            // Telas maiores que smartphones
+            document.documentElement.style.setProperty('--font-size-multiplier', size);
+        }
+        
         localStorage.setItem('fontSize', size);
-
+        
         if (size > 1) {
             fontSizeCard.classList.add('active');
         } else {
             fontSizeCard.classList.remove('active');
         }
     }
+    
+    // Checa o tamanho da tela ao redimensionar
+    window.addEventListener('resize', function() {
+
+        const savedSize = parseFloat(localStorage.getItem('fontSize')) || 1;
+  
+        setFontSize(savedSize);
+    });
+    
     const savedFontSize = localStorage.getItem('fontSize');
     if (savedFontSize) {
         setFontSize(parseFloat(savedFontSize));
     }
-
+    
     if (fontSizeCard) {
-        fontSizeCard.addEventListener('click', function () {
-            const currentMultiplier = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-size-multiplier')) || 1;
-
-            let newSize;
-
-            if (currentMultiplier >= 1.5) {
-                newSize = 1;
-            } else {
-                newSize = 1.5;
-            }
-
+        fontSizeCard.addEventListener('click', function() {
+            const isActive = fontSizeCard.classList.contains('active');
+            
+            // Caso ativo, desligue (1), se não, ative (1.5)
+            const newSize = isActive ? 1 : 1.5;
+            
             setFontSize(newSize);
         });
     }
@@ -259,7 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /******************* RESETA ACESSIBILIDADE **********************/
-    //Maneira de acessar o cartão correspondente de maneira não tradicional, através do conteúdo do texto.
+    //Acessa o cartão correspondente de maneira não tradicional, através do conteúdo do texto.
     let resetCard = null;
     accessibilityCards.forEach(function (card) {
         const cardText = card.querySelector('.accessibility-card-text');

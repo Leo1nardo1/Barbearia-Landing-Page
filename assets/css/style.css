@@ -19,6 +19,7 @@
     --border-color: #ffc107;
     --shadow-color: rgba(0, 0, 0, 0.1);
     --font-size-multiplier: 1;
+    --base-font-size: 16px;
 }
 
 [data-theme="dark"] {
@@ -55,31 +56,21 @@ body{
     grid-template-rows: auto auto auto auto auto auto;
     grid-template-columns: 1fr;
     min-height: 100vh;
-    
 }
 
 /*Tamanho do texto / Acessibilidade */
 
 html {
     scroll-behavior: smooth;
-    font-size: calc(100% * var(--font-size-multiplier));
+    font-size: calc(var(--base-font-size) * var(--font-size-multiplier));
     
 }
-h1 {
-    font-size: calc(clamp(2rem, 6vw, 6rem) * var(--font-size-multiplier));
-}
-
-h2 {
-    font-size: calc(clamp(1.5rem, 4vw, 3rem) * var(--font-size-multiplier));
-}
-
-h3 {
-    font-size: calc(clamp(1.2rem, 3vw, 2.5rem) * var(--font-size-multiplier));
-}
-
-
-
-
+p, h1, h2, h3, h4, h5, h6, span, div, button, input, select, textarea, a, li {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+ 
 /* Navbar */
 .navbar {
     display: flex;
@@ -265,7 +256,6 @@ nav ul li a:hover {
     background: #fff;
     width: 450px;
     height: auto;
-    min-height: 350px;
     border-radius: 16px;
     padding: 30px 25px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
@@ -804,7 +794,6 @@ form .button input:hover {
     align-content: center;
     top: 4px;
     cursor: pointer;
-    font-size: 14px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -1272,4 +1261,9 @@ body,
 
 
 
-
+@media (max-width: 480px) {
+    html {
+      /* Reduce the impact of the multiplier on small screens */
+      font-size: calc(var(--base-font-size) * (1 + (var(--font-size-multiplier) - 1) * 0.6));
+    }
+  }
