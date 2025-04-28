@@ -424,7 +424,6 @@ nav ul li a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 15%;
 }
 
 
@@ -844,6 +843,10 @@ form .button input:hover {
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+  }
+
+  .footerAgenda{
+    height: 15%;
   }
 
 /* MODAL PARA AGENDAMENTOS*/
