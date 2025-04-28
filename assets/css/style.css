@@ -424,6 +424,7 @@ nav ul li a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 15%;
 }
 
 
@@ -629,9 +630,13 @@ nav ul li a:hover {
 /********************************* PÁGINA AGENDAMENTO ********************************/
 /************************************************************************************/
 
+.containerAgendar{
+    height: 100vh;
+}
+
 .booking-section {
     background: linear-gradient(rgba(0, 0, 0, 0.575), rgba(0, 0, 0, 0.897)), url(https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?cs=srgb&dl=pexels-thgusstavo-1813272.jpg&fm=jpg) no-repeat center center/cover;
-    height: auto;
+    height: 85%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -813,7 +818,7 @@ form .button input:hover {
     height: 25px;
     width: 25px;
     background-color: #e4e2e2;
-    border: 1px solid #000;
+    border: 2px solid #000;
   }
   .check-container .terms:hover input ~ .checkmark{
     background-color: #ccc;
@@ -1175,6 +1180,10 @@ body,
     .footer {
         flex-direction: column;
         text-align: center;
+    }
+
+    .containerAgendar{
+        height: auto;
     }
 
     .navbar .logo a {
