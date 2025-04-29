@@ -57,6 +57,12 @@ body{
     grid-template-columns: 1fr;
     min-height: 100vh;
 }
+.layout-form{
+        display: grid;
+        grid-template-rows: auto 1fr auto; 
+        grid-template-columns: 1fr;
+        min-height: 100vh;
+}
 
 /*Tamanho do texto / Acessibilidade */
 
@@ -420,6 +426,7 @@ nav ul li a:hover {
     background: #222;
     color: white;
     text-align: center;
+    height: auto;
     padding: 20px;
     display: flex;
     align-items: center;
@@ -629,21 +636,25 @@ nav ul li a:hover {
 /********************************* PÁGINA AGENDAMENTO ********************************/
 /************************************************************************************/
 
-.containerAgendar{
-    height: 100vh;
+.containerAgendar {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .booking-section {
     background: linear-gradient(rgba(0, 0, 0, 0.575), rgba(0, 0, 0, 0.897)), url(https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?cs=srgb&dl=pexels-thgusstavo-1813272.jpg&fm=jpg) no-repeat center center/cover;
-    height: 85%;
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #000;
-    padding: 100px 0;
+    padding: 20px 0;
 }
 
 .container {
+    height: auto;
+    margin-top: 50px;
     max-width: 700px;
     width: 100%;
     background: #fff;
@@ -845,9 +856,10 @@ form .button input:hover {
     transform: rotate(45deg);
   }
 
-  .footerAgenda{
-    height: 15%;
-  }
+  .footerAgenda {
+    height: auto; 
+    padding: 20px;
+}
 
 /* MODAL PARA AGENDAMENTOS*/
 .modal {
