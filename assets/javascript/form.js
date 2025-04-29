@@ -264,6 +264,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-        showModal('Agendamento realizado com sucesso!', 'agendar.html');
+        showModal('Agendamento realizado com sucesso!', 'appointments.html');
     });
 });
