@@ -13,8 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         textarea.style.height = `${scHeight}px`;
     });
 
-    //Masks na página de agendamento.
-    $('#date').mask('00/00/0000');
+    //Mask para telefone
     $('#phone').mask('(00) 0 0000-0000');
 
     // Configuração de horário comercial
@@ -40,19 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         updateAvailableTimeSlots(this.value);
     });
 
-    // Verifica se o usuário fez um agendamento recentemente pra evitar spam
-    // function hasRecentSubmission() {
-    //     const lastSubmissionTime = localStorage.getItem('lastSubmissionTime');
-    //     if (!lastSubmissionTime) {
-    //         return false;
-    //     }
-    // //Calcula tempo em horas.
-    // const hoursSinceLastSubmission = (Date.now() - parseInt(lastSubmissionTime)) / (1000 * 60 * 60);
-    //retorna true ou false, a depender da quantidade de horas passadas depois do envio, nesse caso, 24 horas.
-    //     return hoursSinceLastSubmission < 24;
-    // }
-
-    //Acompanha o número de envios do formulário em um dia
+    //Acompanha o número de envios do formulário em um dia (Form)
     function getTodaySubmissionCount() {
         const today = new Date().toDateString();
         const submissionData = JSON.parse(localStorage.getItem('submissionData') || '{"date":"", "count":0}');
@@ -64,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return submissionData.count;
     }
 
-    //Atualização do 'count' e 'date' no acompanhamento de envio de formulários
+    //Atualização da contagem e data no acompanhamento de envio de formulários (Form)
     function updateSubmissionTracking() {
         const today = new Date().toDateString();
         const submissionData = JSON.parse(localStorage.getItem('submissionData') || '{"date":"", "count":0}');
@@ -88,7 +75,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Atualiza os horários disponíveis com base na data selecionada e nos agendamentos existentes
     function updateAvailableTimeSlots(selectedDate) {
-        // Reseta a lista de horários disponíveis, começando com a opção padrão
+
+        // Opção padrão ao selecionar uma data
         timePicker.innerHTML = '<option value="">Selecione um horário</option>';
 
         // Se nenhuma data foi selecionada, encerra a função
@@ -100,32 +88,23 @@ document.addEventListener('DOMContentLoaded', function () {
         const selectedDay = new Date(selectedDate);
         const dayOfWeek = selectedDay.getUTCDay();
 
-        // Verifica se a data selecionada é um dia de folga e indica não disponibilidade caso seja
+
+        //Caso seja dia de folga não disponibiliza horários
         if (businessHours.daysOff.includes(dayOfWeek)) {
             timePicker.innerHTML = '<option value="">Não há horários disponíveis neste dia</option>';
             return;
         }
-
-        // Recupera os agendamentos salvos no localStorage (se houver) e converte para array
+        //Pega agendamentos do localstorage e converte a array com json
         const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
 
-        // Gera os horários disponíveis com base no horário de funcionamento e intervalo definido
+        //Armazena os slots de horários
         const timeSlots = generateTimeSlots(businessHours.start, businessHours.end, businessHours.interval);
 
         // Filtra os horários já reservados para a data selecionada
         const bookedTimes = appointments
             .filter(apt => {
-                // Se houver um campo 'appointment_date', verifica se coincide com a data selecionada
                 if (apt.appointment_date) {
                     return apt.appointment_date === selectedDate;
-                }
-
-                // Se a data vier no formato 'DD/MM/YYYY HH:MM', converte para 'YYYY-MM-DD' antes de comparar
-                if (apt.date_time) {
-                    const aptDate = apt.date_time.split(' ')[0];
-                    const [day, month, year] = aptDate.split('/');
-                    const formattedDate = `${year}-${month}-${day}`;
-                    return formattedDate === selectedDate;
                 }
 
                 return false;
@@ -133,12 +112,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .map(apt => {
                 
                 if (apt.appointment_time) return apt.appointment_time;
-
-                // Caso a data e hora estejam no formato 'DD/MM/YYYY HH:MM', extrai apenas o horário (HH:MM)
-                if (apt.date_time) {
-                    const aptTime = apt.date_time.split(' ')[1];
-                    return aptTime.substring(0, 5); // Remove segundos, deixando apenas HH:MM
-                }
 
                 return '';
             });
@@ -224,15 +197,15 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        if (getTodaySubmissionCount() >= 5) {
-            showModal(`Limite de 2 agendamentos por dia atingido. Por favor, tente novamente amanhã.`, 'agendar.html');
+        if (getTodaySubmissionCount() >= 2) {
+            showModal(`Limite de 2 agendamentos por dia atingido. Por favor, tente novamente amanhã.`, 'appointment-form.html');
             return;
         }
 
         //Caso esse campo esteja preenchido, o envio do formulário não será realizado.
         const honeypotField = document.getElementById('website');
         if (honeypotField && honeypotField.value) {
-            window.location.href = 'agendar.html';
+            window.location.href = 'appointment-form.html';
         }
 
         const appointmentDate = datePicker.value;
@@ -264,6 +237,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-        showModal('Agendamento realizado com sucesso!', 'appointments.html');
+        showModal('Agendamento realizado com sucesso!', 'appointment-form.html');
     });
 });
