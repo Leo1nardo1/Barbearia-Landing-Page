@@ -57,6 +57,7 @@ body{
     grid-template-columns: 1fr;
     min-height: 100vh;
 }
+/*layout formulário*/
 .layout-form{
         display: grid;
         grid-template-rows: auto 1fr auto; 
@@ -90,6 +91,7 @@ p, h1, h2, h3, h4, h5, h6, span, div, button, input, select, textarea, a, li {
     left: 0;
     z-index: 1000;
 }
+
 
 .logo a {
     font-family: "Rowdies", sans-serif;
@@ -338,7 +340,7 @@ nav ul li a:hover {
 }
 
 
-/* Estilização do Slide */
+/* Estilização do Slide NA GALERIA  */
 .card-container {
     position: relative;
     width: 100%;

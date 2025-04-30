@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        if (getTodaySubmissionCount() >= 2) {
+        if (getTodaySubmissionCount() >= 21) {
             showModal(`Limite de 2 agendamentos por dia atingido. Por favor, tente novamente amanhã.`, 'appointment-form.html');
             return;
         }
