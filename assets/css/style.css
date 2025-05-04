@@ -1142,7 +1142,7 @@ body,
     }
 }
 /* SOBRE NÓS */
-@media (max-width: 1200px) {
+@media (max-width: 1450px) {
     .about-section .cards-about-section {
         flex-wrap: wrap;
     }
