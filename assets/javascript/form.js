@@ -73,64 +73,81 @@ document.addEventListener('DOMContentLoaded', function () {
         return `${year}-${month}-${day}`;
     }
 
-    // Atualiza os horários disponíveis com base na data selecionada e nos agendamentos existentes
-    function updateAvailableTimeSlots(selectedDate) {
+   // Atualiza os horários disponíveis com base na data selecionada e nos agendamentos existentes
+function updateAvailableTimeSlots(selectedDate) {
+    // Opção padrão ao selecionar uma data
+    timePicker.innerHTML = '<option value="">Selecione um horário</option>';
 
-        // Opção padrão ao selecionar uma data
-        timePicker.innerHTML = '<option value="">Selecione um horário</option>';
+    // Se nenhuma data foi selecionada, encerra a função
+    if (!selectedDate) {
+        return;
+    }
 
-        // Se nenhuma data foi selecionada, encerra a função
-        if (!selectedDate) {
-            return;
-        }
+    // Converte a data selecionada para um objeto Date
+    const selectedDateObj = new Date(selectedDate + 'T00:00:00');
+    const dayOfWeek = selectedDateObj.getDay(); // 0 = Domingo, 6 = Sábado
 
-        // Converte a data selecionada para um objeto Date e obtém o dia da semana (0 = Domingo, 6 = Sábado)
-        const selectedDay = new Date(selectedDate);
-        const dayOfWeek = selectedDay.getUTCDay();
+    // Caso seja dia de folga não disponibiliza horários
+    if (businessHours.daysOff.includes(dayOfWeek)) {
+        timePicker.innerHTML = '<option value="">Não há horários disponíveis neste dia</option>';
+        return;
+    }
 
+    // Pega agendamentos do localstorage e converte a array com json
+    const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
 
-        //Caso seja dia de folga não disponibiliza horários
-        if (businessHours.daysOff.includes(dayOfWeek)) {
-            timePicker.innerHTML = '<option value="">Não há horários disponíveis neste dia</option>';
-            return;
-        }
-        //Pega agendamentos do localstorage e converte a array com json
-        const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+    // Armazena os slots de horários
+    const timeSlots = generateTimeSlots(businessHours.start, businessHours.end, businessHours.interval);
 
-        //Armazena os slots de horários
-        const timeSlots = generateTimeSlots(businessHours.start, businessHours.end, businessHours.interval);
+    // Filtra os horários já reservados para a data selecionada
+    const bookedTimes = appointments
+        .filter(apt => apt.appointment_date === selectedDate)
+        .map(apt => apt.appointment_time || '');
 
-        // Filtra os horários já reservados para a data selecionada
-        const bookedTimes = appointments
-            .filter(apt => {
-                if (apt.appointment_date) {
-                    return apt.appointment_date === selectedDate;
-                }
+    // Verifica se a data selecionada é o dia atual
+    const today = new Date();
+    const todayFormatted = today.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+    const isToday = selectedDate === todayFormatted;
 
-                return false;
-            })
-            .map(apt => {
+    // Hora e minutos atuais (apenas se for hoje)
+    const currentHour = isToday ? today.getHours() : 0;
+    const currentMinute = isToday ? today.getMinutes() : 0;
+
+    // Adiciona os horários disponíveis ao seletor
+    let availableSlotCount = 0;
+    
+    timeSlots.forEach(slot => {
+        // Verifica se o horário já está reservado
+        if (!bookedTimes.includes(slot)) {
+            let shouldShow = true;
+            
+            // Se for hoje, verifica se o horário já passou
+            if (isToday) {
+                const [slotHour, slotMinute] = slot.split(':').map(Number);
                 
-                if (apt.appointment_time) return apt.appointment_time;
-
-                return '';
-            });
-
-        // Adiciona os horários disponíveis ao seletor, ignorando os que já foram reservados
-        timeSlots.forEach(slot => {
-            if (!bookedTimes.includes(slot)) {
+                // Compara diretamente horas e minutos
+                if (slotHour < currentHour || 
+                    (slotHour === currentHour && slotMinute <= currentMinute)) {
+                    shouldShow = false; // Não mostra horários que já passaram
+                }
+            }
+            
+            // Adiciona o horário se ele deve ser mostrado
+            if (shouldShow) {
                 const option = document.createElement('option');
                 option.value = slot;
                 option.textContent = slot;
                 timePicker.appendChild(option);
+                availableSlotCount++;
             }
-        });
-
-        // Se após a filtragem não houver horários disponíveis, exibe a mensagem:
-        if (timePicker.options.length === 1) {
-            timePicker.innerHTML = '<option value="">Não há horários disponíveis neste dia</option>';
         }
+    });
+
+    // Se após a filtragem não houver horários disponíveis, exibe a mensagem
+    if (availableSlotCount === 0) {
+        timePicker.innerHTML = '<option value="">Não há horários disponíveis neste dia</option>';
     }
+}
 
 
     // Gera opções de horários do inicío (9hrs) ao fim (19 hrs)
