@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const timePicker = document.getElementById('appointment_time');
     const textarea = document.querySelector("textarea");
 
-
+    setupAutoRefresh();
 
     //Redimensionamento do textarea no formulario de agendamento
     textarea.addEventListener("keyup", e => {
@@ -199,7 +199,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    //Atualiza os horários em tempo real
+    function setupAutoRefresh() {
 
+        setInterval(() => {
+            const selectedDate = datePicker.value;
+            if (selectedDate) {
+                updateAvailableTimeSlots(selectedDate);
+            }
+        }, 60000); // 1 minuto
+    }
 
 
 
